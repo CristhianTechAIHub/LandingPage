@@ -82,4 +82,4 @@ cd portfolio
 
 ---
 
-*Desarrollado con [Claude Code](https://claude.ai/code) · © 2025 Cristhian Moises Campos Neyra*
+© 2026 Cristhian Moises Campos Neyra*
