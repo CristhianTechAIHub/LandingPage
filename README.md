@@ -22,7 +22,7 @@ Sistema end-to-end de inspección visual con brazo colaborativo. Detección de d
 
 `Python` `YOLOv8` `ResNet-50` `OpenCV` `Jetson Xavier NX` `PLC S7-1500` `TIA Portal` `Universal Robots` `TCP/IP`
 
-### proyecto_02 · Sistema de Sincronización de GMAO
+### proyecto_02 · Sistema de Sincronización de Gestión de Mantenimiento Predictivo
 Plataforma de sincronización bidireccional entre sistemas de gestión de mantenimiento. Detección de anomalías en series temporales con modelo Transformer. Integración multi-base-de-datos y generación automática de órdenes de trabajo.
 
 `Python` `Transformer` `PyTorch` `Oracle` `PostgreSQL` `SQL Server` `InfluxDB`
