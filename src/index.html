@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cristhian Campos · Ingeniero Mecatrónico</title>
+    <meta name="description" content="Portafolio profesional de Cristhian Moises Campos Neyra — Ingeniero Mecatrónico especializado en IA, visión por computadora y robótica industrial.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* ── Variables ── */
+        :root {
+            --bg-primary:    #050a14;
+            --bg-secondary:  #0d1526;
+            --bg-card:       #0f1b2d;
+            --border-color:  #1a2a4a;
+            --accent-cyan:   #00d4ff;
+            --accent-purple: #7b2fff;
+            --accent-green:  #00ff88;
+            --text-primary:  #e2e8f0;
+            --text-secondary:#7a8fa6;
+            --font-sans: 'Space Grotesk', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        /* ── Reset ── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ── Grid background ── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0,212,255,.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,212,255,.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ── Navigation ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 1rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(5, 10, 20, 0.82);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-logo {
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .nav-logo span { color: var(--text-secondary); }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.25s;
+            letter-spacing: 0.01em;
+        }
+        .nav-links a:hover,
+        .nav-links a.active { color: var(--accent-cyan); }
+
+        /* ── Layout ── */
+        main { position: relative; z-index: 1; }
+
+        section {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        /* ────────────────────────────
+           HERO
+        ──────────────────────────── */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 4rem;
+            position: relative;
+        }
+
+        .hero-inner {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 4rem;
+            width: 100%;
+        }
+
+        /* ── Hero text ── */
+        .hero-eyebrow {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+            margin-bottom: 1.25rem;
+            opacity: 0;
+            animation: fadeUp 0.7s ease forwards 0.2s;
+        }
+
+        .hero-name {
+            font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+            font-weight: 700;
+            line-height: 1.08;
+            margin-bottom: 1rem;
+            letter-spacing: -0.03em;
+            opacity: 0;
+            animation: fadeUp 0.7s ease forwards 0.4s;
+        }
+
+        .hero-name .gradient {
+            background: linear-gradient(125deg, var(--accent-cyan) 0%, var(--accent-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-role {
+            font-size: clamp(0.95rem, 2vw, 1.25rem);
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 0.7s ease forwards 0.6s;
+        }
+        .hero-role strong { color: var(--text-primary); font-weight: 600; }
+
+        .hero-desc {
+            max-width: 540px;
+            color: var(--text-secondary);
+            font-size: 0.97rem;
+            line-height: 1.85;
+            margin-bottom: 2.25rem;
+            opacity: 0;
+            animation: fadeUp 0.7s ease forwards 0.8s;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeUp 0.7s ease forwards 1s;
+        }
+
+        .hero-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 2.25rem;
+            opacity: 0;
+            animation: fadeUp 0.7s ease forwards 1.2s;
+        }
+
+        .hero-tag {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            padding: 0.26rem 0.65rem;
+            border-radius: 100px;
+            background: rgba(0,212,255,.07);
+            border: 1px solid rgba(0,212,255,.18);
+            color: var(--accent-cyan);
+            letter-spacing: 0.01em;
+        }
+
+        /* ── Flip card (profile photo) ── */
+        .hero-photo-wrap {
+            flex-shrink: 0;
+            opacity: 0;
+            animation: fadeUp 0.7s ease forwards 0.5s;
+        }
+
+        .flip-card {
+            width: 250px;
+            height: 360px;
+            perspective: 1200px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .flip-card-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .flip-card:hover .flip-card-inner,
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-front,
+        .flip-back {
+            position: absolute;
+            inset: 0;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        /* ── Front face ── */
+        .flip-front {
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        /* Gradient border accent */
+        .flip-front::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            padding: 1px;
+            background: linear-gradient(150deg, rgba(0,212,255,.5), rgba(123,47,255,.35), transparent 55%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .flip-front-inner {
+            width: 100%;
+            height: 100%;
+            background: var(--bg-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .flip-front-inner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            display: block;
+        }
+
+        /* Placeholder */
+        .flip-ph {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(160deg, #0d1e38 0%, #080f20 100%);
+        }
+
+        .flip-ph-initials {
+            font-family: var(--font-mono);
+            font-size: 3.2rem;
+            font-weight: 700;
+            background: linear-gradient(125deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.04em;
+            line-height: 1;
+        }
+
+        .flip-ph-hint {
+            font-family: var(--font-mono);
+            font-size: 0.58rem;
+            color: var(--text-secondary);
+            opacity: 0.45;
+            letter-spacing: 0.1em;
+        }
+
+        /* Hover label */
+        .flip-hint-badge {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: var(--accent-cyan);
+            background: rgba(5,10,20,.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0,212,255,.22);
+            padding: 0.22rem 0.65rem;
+            border-radius: 100px;
+            white-space: nowrap;
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 0.25s;
+            pointer-events: none;
+        }
+        .flip-card:hover .flip-hint-badge { opacity: 1; }
+
+        /* ── Back face ── */
+        .flip-back {
+            background: var(--bg-card);
+            border: 1px solid rgba(0,212,255,.22);
+            transform: rotateY(180deg);
+            padding: 1.6rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            box-shadow: 0 0 40px rgba(0,212,255,.08);
+        }
+
+        .flip-back-section {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .flip-back-label {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: var(--accent-cyan);
+            letter-spacing: 0.12em;
+            opacity: 0.65;
+            margin-bottom: 0.2rem;
+        }
+
+        .flip-back-company {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+        }
+
+        .flip-back-role {
+            font-size: 0.73rem;
+            color: var(--text-secondary);
+            line-height: 1.55;
+        }
+
+        .flip-back-period {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--accent-cyan);
+            opacity: 0.75;
+            margin-top: 0.25rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .flip-back-period::before {
+            content: '';
+            display: inline-block;
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--accent-green);
+            box-shadow: 0 0 6px var(--accent-green);
+            flex-shrink: 0;
+        }
+
+        .flip-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 1.1rem 0;
+        }
+
+        .flip-back-uni {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .flip-back-degree {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            margin-top: 0.2rem;
+        }
+
+        .flip-location {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-family: var(--font-mono);
+            font-size: 0.62rem;
+            color: var(--text-secondary);
+            opacity: 0.55;
+            margin-top: auto;
+            padding-top: 1rem;
+        }
+
+        /* ── Buttons ── */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.65rem;
+            border-radius: 7px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: var(--font-sans);
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+
+        .btn-primary {
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
+        }
+        .btn-primary:hover {
+            background: #28ddff;
+            box-shadow: 0 0 24px rgba(0,212,255,.45);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--accent-cyan);
+            border: 1px solid rgba(0,212,255,.45);
+        }
+        .btn-outline:hover {
+            background: rgba(0,212,255,.08);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0,212,255,.15);
+            transform: translateY(-2px);
+        }
+
+        /* ── Section heading atoms ── */
+        .section-eyebrow {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            letter-spacing: 0.04em;
+        }
+        .section-eyebrow::after {
+            content: '';
+            display: block;
+            width: 48px; height: 1px;
+            background: var(--accent-cyan);
+            opacity: 0.4;
+        }
+
+        .section-title {
+            font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-sub {
+            color: var(--text-secondary);
+            max-width: 520px;
+            margin-bottom: 2.25rem;
+            font-size: 0.97rem;
+            line-height: 1.75;
+        }
+
+        /* ── Skills ── */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.4rem 1.5rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .skill-card:hover {
+            border-color: rgba(0,212,255,.35);
+            box-shadow: 0 0 32px rgba(0,212,255,.07);
+        }
+
+        .skill-icon { font-size: 1.6rem; margin-bottom: 0.65rem; display: block; }
+        .skill-name { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.9rem; color: var(--text-primary); }
+
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+        .stag {
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            padding: 0.22rem 0.55rem;
+            border-radius: 4px;
+            background: rgba(123,47,255,.12);
+            border: 1px solid rgba(123,47,255,.22);
+            color: #a78bfa;
+            letter-spacing: 0.01em;
+        }
+
+        /* ────────────────────────────
+           PROJECTS
+        ──────────────────────────── */
+        .projects-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+            position: relative;
+        }
+
+        /* Left accent bar */
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 100%;
+            background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-purple));
+            z-index: 1;
+        }
+
+        .project-card:hover {
+            border-color: rgba(0,212,255,.3);
+            box-shadow: 0 10px 48px rgba(0,212,255,.07);
+            transform: translateY(-4px);
+        }
+
+        /* ── Carousel ── */
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            height: 260px;
+            user-select: none;
+        }
+
+        .carousel-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Placeholder when no real image */
+        .img-ph {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Subtle diagonal grid pattern */
+        .img-ph::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(45deg, rgba(255,255,255,.02) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(255,255,255,.02) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(255,255,255,.02) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(255,255,255,.02) 75%);
+            background-size: 20px 20px;
+        }
+
+        .img-ph-icon {
+            font-size: 2rem;
+            opacity: 0.4;
+            position: relative;
+            z-index: 1;
+        }
+
+        .img-ph-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            opacity: 0.7;
+            letter-spacing: 0.04em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .img-ph-sub {
+            font-family: var(--font-mono);
+            font-size: 0.62rem;
+            color: var(--text-secondary);
+            opacity: 0.4;
+            letter-spacing: 0.06em;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Gradient tints per slide */
+        .img-ph.tint-1 { background: linear-gradient(135deg, #071929 0%, #071420 100%); }
+        .img-ph.tint-2 { background: linear-gradient(135deg, #0d0d25 0%, #0a0a1e 100%); }
+        .img-ph.tint-3 { background: linear-gradient(135deg, #0a1c10 0%, #060e0c 100%); }
+
+        /* Real image inside a slide */
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Carousel arrows */
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background: rgba(5,10,20,.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0,212,255,.25);
+            color: var(--accent-cyan);
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+            line-height: 1;
+            transition: background 0.2s, border-color 0.2s, opacity 0.2s;
+            opacity: 0;
+        }
+        .carousel:hover .carousel-btn { opacity: 1; }
+        .carousel-btn:hover {
+            background: rgba(0,212,255,.15);
+            border-color: var(--accent-cyan);
+        }
+        .carousel-prev { left: 12px; }
+        .carousel-next { right: 12px; }
+
+        .carousel-btn:disabled {
+            opacity: 0 !important;
+            pointer-events: none;
+            visibility: hidden;
+        }
+
+        /* Dots */
+        .carousel-dots {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: rgba(255,255,255,.25);
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            transition: background 0.25s, transform 0.25s;
+        }
+        .dot.active {
+            background: var(--accent-cyan);
+            transform: scale(1.3);
+        }
+
+        /* Slide counter badge */
+        .carousel-counter {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            color: var(--text-secondary);
+            background: rgba(5,10,20,.65);
+            backdrop-filter: blur(6px);
+            padding: 0.2rem 0.55rem;
+            border-radius: 100px;
+            border: 1px solid var(--border-color);
+            z-index: 10;
+        }
+
+        /* Upload hint badge */
+        .carousel-hint {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-family: var(--font-mono);
+            font-size: 0.62rem;
+            color: var(--accent-cyan);
+            background: rgba(0,212,255,.07);
+            border: 1px solid rgba(0,212,255,.18);
+            padding: 0.2rem 0.55rem;
+            border-radius: 100px;
+            z-index: 10;
+            opacity: 0.8;
+        }
+
+        /* ── Project body ── */
+        .project-body {
+            padding: 1.75rem 2.25rem 1.75rem 2.75rem;
+        }
+
+        .project-num {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--accent-cyan);
+            opacity: 0.55;
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.06em;
+        }
+
+        .project-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+            letter-spacing: -0.02em;
+        }
+
+        .project-client {
+            font-size: 0.82rem;
+            color: var(--accent-cyan);
+            font-weight: 500;
+            margin-bottom: 1.1rem;
+        }
+
+        .project-desc {
+            color: var(--text-secondary);
+            font-size: 0.93rem;
+            line-height: 1.78;
+            margin-bottom: 1.25rem;
+        }
+
+        .project-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .project-features li {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(26,42,74,0.55);
+        }
+
+        .project-features li:first-child { padding-top: 0; }
+        .project-features li:last-child  { border-bottom: none; padding-bottom: 0; }
+
+        .feat-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .feat-label::before {
+            content: '▸';
+            color: var(--accent-cyan);
+            font-size: 0.7rem;
+            flex-shrink: 0;
+        }
+
+        .feat-text {
+            font-size: 0.855rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            padding-left: 1.1rem;
+        }
+
+        .project-tech { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+
+        .tbadge {
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            padding: 0.22rem 0.6rem;
+            border-radius: 4px;
+            background: rgba(0,212,255,.07);
+            border: 1px solid rgba(0,212,255,.18);
+            color: var(--accent-cyan);
+            letter-spacing: 0.01em;
+        }
+
+        /* ── Contact ── */
+        #contacto { text-align: center; }
+        #contacto .section-eyebrow { justify-content: center; }
+        #contacto .section-eyebrow::after { display: none; }
+
+        .contact-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 3rem 2.5rem;
+            max-width: 580px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: -120px; left: 50%;
+            transform: translateX(-50%);
+            width: 320px; height: 320px;
+            background: radial-gradient(circle, rgba(0,212,255,.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .contact-card p {
+            color: var(--text-secondary);
+            line-height: 1.85;
+            margin-bottom: 2rem;
+            font-size: 0.97rem;
+        }
+
+        .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+        /* ── Footer ── */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            letter-spacing: 0.03em;
+            position: relative; z-index: 1;
+        }
+
+        /* ── Scroll reveal ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ── Keyframes ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(22px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── Scrollbar ── */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan); }
+
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+            .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+            .hero-photo-wrap { order: -1; display: flex; justify-content: center; }
+            .flip-card { width: 210px; height: 300px; }
+            .flip-ph-initials { font-size: 2.6rem; }
+        }
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.25rem; }
+            section { padding: 4rem 1.25rem; }
+            .project-body { padding: 1.25rem 1.5rem 1.25rem 1.9rem; }
+            .contact-card { padding: 1.75rem 1.5rem; }
+            .carousel { height: 200px; }
+        }
+        @media (max-width: 520px) {
+            .nav-links { display: none; }
+            .hero-name { font-size: 2.1rem; }
+            .flip-card { width: 180px; height: 256px; }
+            .flip-ph-initials { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<nav>
+    <a href="#hero" class="nav-logo">cristhian<span>.dev</span></a>
+    <ul class="nav-links">
+        <li><a href="#habilidades">Habilidades</a></li>
+        <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+    </ul>
+</nav>
+
+<main>
+
+<!-- ── Hero ── -->
+<section id="hero">
+    <div class="hero-inner">
+
+        <!-- Text -->
+        <div class="hero-content">
+            <p class="hero-eyebrow">// Hola, soy</p>
+            <h1 class="hero-name">
+                Cristhian Moises<br>
+                <span class="gradient">Campos Neyra</span>
+            </h1>
+            <p class="hero-role">
+                <strong>Ingeniero Mecatrónico</strong> &nbsp;·&nbsp; AI &amp; Robotics Engineer
+            </p>
+            <p class="hero-desc">
+                Combino mecatrónica, inteligencia artificial y automatización industrial para crear sistemas en la intersección de la robótica colaborativa, la visión por computadora y los modelos de deep learning.
+            </p>
+            <div class="hero-cta">
+                <a href="#proyectos" class="btn btn-primary">Ver proyectos</a>
+                <a href="https://www.linkedin.com/in/cristhian-moises-campos-neyra-a8bb27257"
+                   target="_blank" rel="noopener" class="btn btn-outline">LinkedIn ↗</a>
+            </div>
+            <div class="hero-tags">
+                <span class="hero-tag">Machine Learning</span>
+                <span class="hero-tag">Computer Vision</span>
+                <span class="hero-tag">Deep Learning</span>
+                <span class="hero-tag">AI Agents</span>
+                <span class="hero-tag">Industria 4.0</span>
+                <span class="hero-tag">Robótica Colaborativa</span>
+            </div>
+        </div>
+
+        <!-- Profile photo (flip card) -->
+        <div class="hero-photo-wrap">
+            <div class="flip-card" tabindex="0" role="button" aria-label="Ver perfil profesional">
+                <div class="flip-card-inner">
+
+                    <!-- ── Frente: foto ── -->
+                    <div class="flip-front">
+                        <div class="flip-front-inner">
+                            <!--
+                                Para usar tu foto real, reemplaza el div.flip-ph por:
+                                <img src="../images/foto.jpg" alt="Cristhian Campos">
+                            -->
+                            <div class="flip-ph">
+                                <span class="flip-ph-initials">CMC</span>
+                                <span class="flip-ph-hint">foto de perfil</span>
+                            </div>
+                        </div>
+                        <span class="flip-hint-badge">hover · ver perfil ↻</span>
+                    </div>
+
+                    <!-- ── Reverso: experiencia + educación ── -->
+                    <div class="flip-back">
+                        <div class="flip-back-section">
+                            <span class="flip-back-label">// experiencia</span>
+                            <span class="flip-back-company">DINAUT</span>
+                            <span class="flip-back-role">Desarrollo completo e integración de software con hardware en sistemas de automatización e IA industrial.</span>
+                            <span class="flip-back-period">2024 – Presente</span>
+                        </div>
+
+                        <div class="flip-divider"></div>
+
+                        <div class="flip-back-section">
+                            <span class="flip-back-label">// educación</span>
+                            <span class="flip-back-uni">Pontificia Universidad Católica del Perú</span>
+                            <span class="flip-back-degree">Bachiller en Ingeniería Mecatrónica</span>
+                        </div>
+
+                        <div class="flip-location">
+                            <span>📍</span><span>Lima, Perú</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ── Skills ── -->
+<section id="habilidades">
+    <p class="section-eyebrow reveal">// stack tecnológico</p>
+    <h2 class="section-title reveal">Habilidades &amp; Tecnologías</h2>
+    <p class="section-sub reveal">
+        Especializado en integrar inteligencia artificial con hardware industrial y sistemas robóticos.
+    </p>
+
+    <div class="skills-grid">
+        <div class="skill-card reveal">
+            <span class="skill-icon">🧠</span>
+            <p class="skill-name">Machine Learning</p>
+            <div class="skill-tags">
+                <span class="stag">Python</span>
+                <span class="stag">scikit-learn</span>
+                <span class="stag">PyTorch</span>
+                <span class="stag">TensorFlow</span>
+                <span class="stag">Keras</span>
+            </div>
+        </div>
+
+        <div class="skill-card reveal">
+            <span class="skill-icon">👁️</span>
+            <p class="skill-name">Visión por Computadora</p>
+            <div class="skill-tags">
+                <span class="stag">YOLO</span>
+                <span class="stag">ResNet50</span>
+                <span class="stag">SAM2</span>
+                <span class="stag">OpenCV</span>
+            </div>
+        </div>
+
+        <div class="skill-card reveal">
+            <span class="skill-icon">🤖</span>
+            <p class="skill-name">Agentes de IA</p>
+            <div class="skill-tags">
+                <span class="stag">LangChain</span>
+                <span class="stag">LangGraph</span>
+            </div>
+        </div>
+
+        <div class="skill-card reveal">
+            <span class="skill-icon">🏭</span>
+            <p class="skill-name">Automatización Industrial</p>
+            <div class="skill-tags">
+                <span class="stag">TIA Portal</span>
+                <span class="stag">PLC S7-1500</span>
+                <span class="stag">Industria 4.0</span>
+                <span class="stag">ESP32</span>
+            </div>
+        </div>
+
+        <div class="skill-card reveal">
+            <span class="skill-icon">🦾</span>
+            <p class="skill-name">Robótica Colaborativa</p>
+            <div class="skill-tags">
+                <span class="stag">Universal Robots</span>
+                <span class="stag">Cobots</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ── Projects ── -->
+<section id="proyectos">
+    <p class="section-eyebrow reveal">// proyectos destacados</p>
+    <h2 class="section-title reveal">Proyectos</h2>
+    <p class="section-sub reveal">
+        Soluciones reales que integran inteligencia artificial con sistemas industriales y robóticos.
+    </p>
+
+    <div class="projects-list">
+
+        <!-- ── Project 01 ── -->
+        <div class="project-card reveal">
+
+            <!-- Carousel -->
+            <div class="carousel" data-carousel>
+                <div class="carousel-track">
+                    <div class="carousel-slide">
+                        <img src="images/senati/senati1.jpeg" alt="Módulo I4.0 – celda robótica SENATI">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/senati/senati2.jpeg" alt="Módulo I4.0 – integración PLC y cobot">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/senati/senati3.jpeg" alt="Módulo I4.0 – visión por computadora">
+                    </div>
+                </div>
+
+                <button class="carousel-btn carousel-prev" aria-label="Anterior">&#8249;</button>
+                <button class="carousel-btn carousel-next" aria-label="Siguiente">&#8250;</button>
+
+                <div class="carousel-dots">
+                    <button class="dot active" aria-label="Imagen 1"></button>
+                    <button class="dot" aria-label="Imagen 2"></button>
+                    <button class="dot" aria-label="Imagen 3"></button>
+                </div>
+
+                <span class="carousel-counter">1 / 3</span>
+            </div>
+
+            <!-- Body -->
+            <div class="project-body">
+                <p class="project-num">proyecto_01</p>
+                <h3 class="project-name">Módulo de Industria 4.0</h3>
+                <p class="project-client">SENATI · Arquitectura Edge AI + Robótica Colaborativa</p>
+                <p class="project-desc">
+                    La IA no como módulo aislado, sino como el cerebro de la automatización. Celda industrial con arquitectura heterogénea donde una Jetson, una IPC y un PLC hablan el mismo idioma para guiar un cobot con precisión milimétrica — convirtiendo una "curiosidad de laboratorio" en una solución de ingeniería robusta.
+                </p>
+                <ul class="project-features">
+                    <li>
+                        <span class="feat-label">Seguridad y Gateway · Edge AI</span>
+                        <span class="feat-text">NVIDIA Jetson Xavier NX como punto de entrada inteligente de la celda: autenticación biométrica por reconocimiento facial y gestión centralizada del flujo de comunicación con el PLC S7-1500 mediante protocolos TCP/IP industriales.</span>
+                    </li>
+                    <li>
+                        <span class="feat-label">Visión para la Acción · Localización</span>
+                        <span class="feat-text">Pipeline de segmentación de instancias procesado en una IPC Industrial para detección y localización de piezas en escena. El núcleo fue la lógica de transformación de coordenadas: de píxeles del modelo a posiciones precisas en el espacio tridimensional, alcanzando precisión milimétrica para el movimiento del cobot.</span>
+                    </li>
+                    <li>
+                        <span class="feat-label">Monitoreo en Tiempo Real · HMI</span>
+                        <span class="feat-text">Webserver embebido dedicado a la visualización en vivo de las inferencias del modelo de visión. Permite supervisión, diagnóstico y ajuste de parámetros desde cualquier dispositivo conectado a la red industrial, convirtiendo cada inferencia en información accionable para el operador.</span>
+                    </li>
+                    <li>
+                        <span class="feat-label">Control de Calidad · Clasificación en el Borde</span>
+                        <span class="feat-text">Módulo TM NPU de Siemens integrado en el ciclo de control del PLC ejecutando ResNet-50 en tiempo real. La clasificación ocurre directamente en el controlador, eliminando latencias de comunicación externa y garantizando decisiones deterministas dentro del ciclo de PLC.</span>
+                    </li>
+                </ul>
+                <div class="project-tech">
+                    <span class="tbadge">Python</span>
+                    <span class="tbadge">YOLOv8</span>
+                    <span class="tbadge">ResNet-50</span>
+                    <span class="tbadge">Jetson Xavier NX</span>
+                    <span class="tbadge">IPC Industrial</span>
+                    <span class="tbadge">TM NPU Siemens</span>
+                    <span class="tbadge">PLC S7-1500</span>
+                    <span class="tbadge">TIA Portal</span>
+                    <span class="tbadge">Universal Robots</span>
+                    <span class="tbadge">TCP/IP</span>
+                    <span class="tbadge">OpenCV</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Project 02 ── -->
+        <div class="project-card reveal">
+
+            <!-- Carousel -->
+            <div class="carousel" data-carousel>
+                <div class="carousel-track">
+                    <div class="carousel-slide">
+                        <div class="img-ph tint-2">
+                            <span class="img-ph-icon">🔄</span>
+                            <span class="img-ph-label">Pipeline de sincronización</span>
+                            <span class="img-ph-sub">REEMPLAZAR CON IMAGEN REAL</span>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="img-ph tint-3">
+                            <span class="img-ph-icon">📊</span>
+                            <span class="img-ph-label">Detección de anomalías · Transformer</span>
+                            <span class="img-ph-sub">REEMPLAZAR CON IMAGEN REAL</span>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="img-ph tint-2">
+                            <span class="img-ph-icon">🗄️</span>
+                            <span class="img-ph-label">Integración multi-base-de-datos</span>
+                            <span class="img-ph-sub">REEMPLAZAR CON IMAGEN REAL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="carousel-btn carousel-prev" aria-label="Anterior">&#8249;</button>
+                <button class="carousel-btn carousel-next" aria-label="Siguiente">&#8250;</button>
+
+                <div class="carousel-dots">
+                    <button class="dot active" aria-label="Imagen 1"></button>
+                    <button class="dot" aria-label="Imagen 2"></button>
+                    <button class="dot" aria-label="Imagen 3"></button>
+                </div>
+
+                <span class="carousel-counter">1 / 3</span>
+            </div>
+
+            <!-- Body -->
+            <div class="project-body">
+                <p class="project-num">proyecto_02</p>
+                <h3 class="project-name">Sistema de Sincronización de GMAO</h3>
+                <p class="project-client">Gestión de Mantenimiento · IA + Bases de Datos Heterogéneas</p>
+                <p class="project-desc">
+                    Plataforma de sincronización bidireccional entre dos sistemas de gestión de mantenimiento (GMAO), con detección automática de anomalías mediante un modelo Transformer entrenado sobre series temporales de sensores industriales. Las anomalías detectadas disparan automáticamente la creación de órdenes de trabajo en ambos sistemas.
+                </p>
+                <ul class="project-features">
+                    <li>Pipeline multi-base-de-datos unificado integrando Oracle, PostgreSQL, SQL Server e InfluxDB.</li>
+                    <li>Modelo Transformer para detección de anomalías en series temporales de datos de sensores industriales.</li>
+                    <li>Generación automática de órdenes de trabajo en el sistema maestro con reflejo instantáneo en el sistema esclavo.</li>
+                    <li>Entrenamiento continuo del modelo con datos históricos almacenados en InfluxDB, sin intervención manual.</li>
+                </ul>
+                <div class="project-tech">
+                    <span class="tbadge">Python</span>
+                    <span class="tbadge">Transformer</span>
+                    <span class="tbadge">PyTorch</span>
+                    <span class="tbadge">Oracle</span>
+                    <span class="tbadge">PostgreSQL</span>
+                    <span class="tbadge">SQL Server</span>
+                    <span class="tbadge">InfluxDB</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ── Contact ── -->
+<section id="contacto">
+    <p class="section-eyebrow reveal">// contacto</p>
+    <h2 class="section-title reveal">¿Trabajamos juntos?</h2>
+
+    <div class="contact-card reveal">
+        <p>
+            Estoy disponible para proyectos de consultoría, colaboraciones en I+D y oportunidades laborales en inteligencia artificial aplicada, automatización industrial y robótica. Escríbeme por LinkedIn.
+        </p>
+        <div class="contact-links">
+            <a href="https://www.linkedin.com/in/cristhian-moises-campos-neyra-a8bb27257"
+               target="_blank" rel="noopener" class="btn btn-primary">LinkedIn ↗</a>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<!-- ── Footer ── -->
+<footer>
+    <p>// cristhian.campos &nbsp;·&nbsp; ingeniero mecatrónico &nbsp;·&nbsp; &copy; 2025</p>
+</footer>
+
+<script>
+    /* ════════════════════════════
+       Scroll reveal
+    ════════════════════════════ */
+    const revealObs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const siblings = Array.from(entry.target.parentElement.children);
+            entry.target.style.transitionDelay = `${siblings.indexOf(entry.target) * 0.07}s`;
+            entry.target.classList.add('visible');
+            revealObs.unobserve(entry.target);
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    /* ════════════════════════════
+       Active nav link
+    ════════════════════════════ */
+    const navObs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const id = entry.target.getAttribute('id');
+            document.querySelectorAll('.nav-links a').forEach(a => {
+                a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
+            });
+        });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+
+    document.querySelectorAll('section[id]').forEach(s => navObs.observe(s));
+
+    /* ════════════════════════════
+       Flip card — keyboard support
+    ════════════════════════════ */
+    document.querySelectorAll('.flip-card').forEach(card => {
+        card.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                card.classList.toggle('flipped');
+            }
+        });
+    });
+
+    /* ════════════════════════════
+       Carousels
+    ════════════════════════════ */
+    document.querySelectorAll('[data-carousel]').forEach(carousel => {
+        const track   = carousel.querySelector('.carousel-track');
+        const slides  = carousel.querySelectorAll('.carousel-slide');
+        const dots    = carousel.querySelectorAll('.dot');
+        const counter = carousel.querySelector('.carousel-counter');
+        const btnPrev = carousel.querySelector('.carousel-prev');
+        const btnNext = carousel.querySelector('.carousel-next');
+        const total   = slides.length;
+        let current   = 0;
+        let startX    = 0;
+        let isDragging = false;
+
+        function goTo(index) {
+            current = Math.max(0, Math.min(index, total - 1));
+            track.style.transform = `translateX(-${current * 100}%)`;
+
+            dots.forEach((d, i) => d.classList.toggle('active', i === current));
+            if (counter) counter.textContent = `${current + 1} / ${total}`;
+            if (btnPrev) btnPrev.disabled = current === 0;
+            if (btnNext) btnNext.disabled = current === total - 1;
+        }
+
+        btnPrev?.addEventListener('click', () => goTo(current - 1));
+        btnNext?.addEventListener('click', () => goTo(current + 1));
+        dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+
+        /* Touch / drag support */
+        carousel.addEventListener('pointerdown', e => {
+            if (e.target.closest('.carousel-btn, .dot')) return;
+            startX = e.clientX;
+            isDragging = true;
+        });
+
+        carousel.addEventListener('pointerup', e => {
+            if (!isDragging) return;
+            isDragging = false;
+            const diff = startX - e.clientX;
+            if (Math.abs(diff) > 50) goTo(diff > 0 ? current + 1 : current - 1);
+        });
+
+        /* Keyboard support when focused */
+        carousel.setAttribute('tabindex', '0');
+        carousel.addEventListener('keydown', e => {
+            if (e.key === 'ArrowLeft')  goTo(current - 1);
+            if (e.key === 'ArrowRight') goTo(current + 1);
+        });
+
+        goTo(0); // init
+    });
+</script>
+
+</body>
+</html>
