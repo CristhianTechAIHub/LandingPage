@@ -1055,6 +1055,105 @@
         /* ══════════════════════════════
        CONTACT
     ══════════════════════════════ */
+        /* ── Sobre mí / cierre ── */
+        .about-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem 5rem;
+            align-items: center;
+        }
+
+        .about-eyebrow {
+            font-family: var(--font-mono);
+            font-size: .78rem;
+            color: var(--accent-cyan);
+            letter-spacing: .08em;
+            margin-bottom: 1.1rem;
+        }
+
+        .about-headline {
+            font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+            font-weight: 700;
+            letter-spacing: -.03em;
+            line-height: 1.2;
+            margin-bottom: 1.4rem;
+        }
+
+        .about-headline .gradient {
+            background: linear-gradient(125deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-body {
+            color: var(--text-secondary);
+            line-height: 1.85;
+            font-size: .97rem;
+            display: flex;
+            flex-direction: column;
+            gap: .9rem;
+        }
+
+        .about-body strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+        }
+
+        .about-stat {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 1.4rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: border-color .3s, transform .3s;
+        }
+
+        .about-stat:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-3px);
+        }
+
+        .about-stat-num {
+            font-family: var(--font-mono);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            line-height: 1;
+            margin-bottom: .35rem;
+        }
+
+        .about-stat-label {
+            font-size: .83rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .about-stat::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-cyan), transparent);
+            opacity: 0;
+            transition: opacity .3s;
+        }
+
+        .about-stat:hover::after { opacity: 1; }
+
+        @media (max-width: 768px) {
+            .about-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+        }
+
         #contacto {
             position: relative;
         }
@@ -1229,6 +1328,7 @@
         <ul class="nav-links">
             <li><a href="#destacados">Destacados</a></li>
             <li><a href="#proyectos">Proyectos</a></li>
+            <li><a href="#sobre-mi">Sobre mí</a></li>
             <li><a href="#contacto">Contacto</a></li>
         </ul>
     </nav>
@@ -1338,6 +1438,43 @@
 
             <div class="projects-panel" id="projectsPanel">
                 <!-- Rendered by JS -->
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════
+         SOBRE MÍ / CIERRE
+    ══════════════════════════════ -->
+        <section id="sobre-mi">
+            <div class="about-wrap">
+                <div class="about-left reveal">
+                    <p class="about-eyebrow">// y este soy yo</p>
+                    <h2 class="about-headline">Cristhian Campos Neyra,<br><span class="gradient">ingeniero que hace que la IA funcione en el mundo real.</span></h2>
+                    <div class="about-body">
+                        <p>No trabajo con IA en abstracto. Diseño sistemas donde un modelo toma una decisión, un PLC la ejecuta y una máquina actúa — en milisegundos, sin margen de error.</p>
+                        <p>Mi enfoque está en el punto de tensión entre <strong>la inteligencia artificial y la industria</strong>: donde los datos de sensores se convierten en órdenes de trabajo, donde la visión artificial guía un cobot, donde un Transformer detecta fallos antes de que ocurran.</p>
+                        <p>Si tienes un proceso que necesita ser más inteligente, es probable que ya tenga los datos para hacerlo posible.</p>
+                    </div>
+                </div>
+                <div class="about-right reveal">
+                    <div class="about-stats">
+                        <div class="about-stat">
+                            <span class="about-stat-num">2+</span>
+                            <span class="about-stat-label">años integrando IA en entornos industriales reales</span>
+                        </div>
+                        <div class="about-stat">
+                            <span class="about-stat-num">5+</span>
+                            <span class="about-stat-label">tecnologías heterogéneas integradas en un solo sistema</span>
+                        </div>
+                        <div class="about-stat">
+                            <span class="about-stat-num">0ms</span>
+                            <span class="about-stat-label">de tolerancia a errores en sistemas de control críticos</span>
+                        </div>
+                        <div class="about-stat">
+                            <span class="about-stat-num">100%</span>
+                            <span class="about-stat-label">orientado a resultados medibles en producción</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
