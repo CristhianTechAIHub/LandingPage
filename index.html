@@ -1063,9 +1063,13 @@
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 20px;
-            padding: 2.5rem 2.75rem;
+            padding: 3rem 3.25rem;
             position: relative;
             overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2.5rem 4rem;
+            align-items: center;
         }
 
         .contact-card::before {
@@ -1078,11 +1082,21 @@
             background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple), var(--accent-green));
         }
 
+        .contact-left { grid-column: 1; }
+        .contact-right {
+            grid-column: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+            min-width: 200px;
+        }
+
         .contact-title {
-            font-size: clamp(1.4rem, 3vw, 2rem);
+            font-size: clamp(1.4rem, 2.8vw, 2.1rem);
             font-weight: 700;
             letter-spacing: -.025em;
-            margin-bottom: 1rem;
+            margin-bottom: .9rem;
         }
 
         .contact-title .gradient {
@@ -1094,16 +1108,42 @@
 
         .contact-text {
             color: var(--text-secondary);
-            max-width: 560px;
             line-height: 1.8;
             font-size: .97rem;
-            margin-bottom: 1.8rem;
+            margin: 0;
         }
 
         .contact-links {
             display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: .85rem;
+            width: 100%;
+        }
+
+        .contact-links .btn {
+            width: 100%;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .contact-availability {
+            font-family: var(--font-mono);
+            font-size: .72rem;
+            color: var(--accent-green);
+            display: flex;
+            align-items: center;
+            gap: .45rem;
+            margin-top: .25rem;
+        }
+
+        .contact-availability::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent-green);
+            box-shadow: 0 0 8px var(--accent-green);
+            animation: pulse 2s infinite;
         }
 
         /* ── Footer ── */
@@ -1139,7 +1179,26 @@
             }
 
             .contact-card {
-                padding: 1.8rem 1.5rem;
+                grid-template-columns: 1fr;
+                padding: 2rem 1.5rem;
+                gap: 2rem;
+            }
+
+            .contact-right {
+                grid-column: 1;
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .contact-links {
+                flex-direction: row;
+                width: auto;
+                flex: 1;
+            }
+
+            .contact-links .btn {
+                width: auto;
+                flex: 1;
             }
 
             nav {
@@ -1291,19 +1350,22 @@
     ══════════════════════════════ -->
         <section id="contacto">
             <div class="contact-card reveal">
-                <p class="section-eyebrow" style="margin-bottom:1rem;">// hablemos</p>
-                <h2 class="contact-title">¿Cómo puedo ayudarte a <span class="gradient">optimizar tus procesos?</span>
-                </h2>
-                <p class="contact-text">
-                    Estoy disponible para proyectos de consultoría, colaboraciones en I+D y oportunidades laborales en
-                    inteligencia artificial aplicada, automatización industrial y robótica. Escríbeme por LinkedIn.
-                </p>
-                <div class="contact-links">
-                    <a href="https://www.linkedin.com/in/cristhian-moises-campos-neyra-a8bb27257" target="_blank"
-                        rel="noopener" class="btn btn-primary">LinkedIn ↗</a>
-                    <!-- Reemplaza el número con tu WhatsApp real: https://wa.me/51XXXXXXXXX -->
-                    <a href="https://wa.me/51999999999" target="_blank" rel="noopener" class="btn btn-green">WhatsApp
-                        ↗</a>
+                <div class="contact-left">
+                    <p class="section-eyebrow" style="margin-bottom:1rem;">// hablemos</p>
+                    <h2 class="contact-title">¿Cómo puedo ayudarte a<br><span class="gradient">optimizar tus procesos?</span></h2>
+                    <p class="contact-text">
+                        Estoy disponible para proyectos de consultoría, colaboraciones en I+D y oportunidades laborales en
+                        inteligencia artificial aplicada, automatización industrial y robótica.
+                    </p>
+                </div>
+                <div class="contact-right">
+                    <span class="contact-availability">Disponible para nuevos proyectos</span>
+                    <div class="contact-links">
+                        <a href="https://www.linkedin.com/in/cristhian-moises-campos-neyra-a8bb27257" target="_blank"
+                            rel="noopener" class="btn btn-primary">LinkedIn ↗</a>
+                        <!-- Reemplaza el número con tu WhatsApp real: https://wa.me/51XXXXXXXXX -->
+                        <a href="https://wa.me/51999999999" target="_blank" rel="noopener" class="btn btn-green">WhatsApp ↗</a>
+                    </div>
                 </div>
             </div>
         </section>
