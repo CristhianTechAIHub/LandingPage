@@ -1213,6 +1213,306 @@
             }
         }
 
+        /* ══════════════════════════════
+           EDITOR MODE
+        ══════════════════════════════ */
+        .nav-editor-area {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+        }
+
+        .editor-badge {
+            display: none;
+            align-items: center;
+            gap: .4rem;
+            font-family: var(--font-mono);
+            font-size: .7rem;
+            font-weight: 600;
+            color: #050a14;
+            background: var(--accent-green);
+            padding: .25rem .65rem;
+            border-radius: 100px;
+            letter-spacing: .04em;
+        }
+
+        body.editor-mode .editor-badge { display: flex; }
+
+        .lock-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            border-radius: 8px;
+            padding: .4rem .65rem;
+            font-size: .82rem;
+            cursor: pointer;
+            transition: all .2s;
+            display: flex;
+            align-items: center;
+            gap: .3rem;
+            font-family: var(--font-sans);
+        }
+
+        .lock-btn:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
+        body.editor-mode .lock-btn { border-color: rgba(255,60,60,.4); color: #ff6060; }
+        body.editor-mode .lock-btn:hover { border-color: #ff6060; background: rgba(255,60,60,.07); }
+
+        .pass-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(5,10,20,.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pass-overlay.open { display: flex; }
+
+        .pass-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 2.5rem 2rem;
+            width: 100%;
+            max-width: 380px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .pass-box h3 { font-size: 1.1rem; font-weight: 700; }
+        .pass-box p { font-size: .85rem; color: var(--text-secondary); }
+
+        .pass-input {
+            width: 100%;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: .7rem 1rem;
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            font-size: .9rem;
+            outline: none;
+            transition: border-color .2s;
+        }
+
+        .pass-input:focus { border-color: var(--accent-cyan); }
+        .pass-error { font-size: .8rem; color: #ff6060; display: none; }
+        .pass-error.visible { display: block; }
+
+        .fab-add {
+            display: none;
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 300;
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
+            border: none;
+            border-radius: 50px;
+            padding: .8rem 1.5rem;
+            font-size: .88rem;
+            font-weight: 700;
+            font-family: var(--font-sans);
+            cursor: pointer;
+            box-shadow: 0 8px 32px rgba(0,212,255,.35);
+            transition: transform .2s, box-shadow .2s;
+            align-items: center;
+            gap: .4rem;
+        }
+
+        body.editor-mode .fab-add { display: flex; }
+        .fab-add:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,212,255,.5); }
+
+        .edit-btn {
+            display: none;
+            position: absolute;
+            top: .55rem;
+            left: .55rem;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,.12);
+            background: rgba(5,10,20,.7);
+            backdrop-filter: blur(4px);
+            cursor: pointer;
+            font-size: .78rem;
+            align-items: center;
+            justify-content: center;
+            transition: transform .2s, border-color .2s;
+            z-index: 2;
+            color: var(--text-secondary);
+        }
+
+        body.editor-mode .edit-btn { display: flex; }
+        .edit-btn:hover { transform: scale(1.2); border-color: var(--accent-cyan); color: var(--accent-cyan); }
+        body:not(.editor-mode) .highlight-btn { display: none; }
+
+        .form-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(5,10,20,.92);
+            backdrop-filter: blur(8px);
+            z-index: 900;
+            overflow-y: auto;
+            padding: 2rem 1rem;
+        }
+
+        .form-overlay.open { display: block; }
+
+        .project-form {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 2rem 2.5rem;
+            max-width: 780px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+        }
+
+        .form-header { display: flex; justify-content: space-between; align-items: center; }
+        .form-header h2 { font-size: 1.2rem; font-weight: 700; }
+
+        .form-close {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: .3rem;
+            border-radius: 6px;
+            transition: color .2s;
+        }
+
+        .form-close:hover { color: var(--text-primary); }
+
+        .form-section-title {
+            font-family: var(--font-mono);
+            font-size: .72rem;
+            color: var(--accent-cyan);
+            letter-spacing: .08em;
+            margin-bottom: .3rem;
+            padding-bottom: .4rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+        .form-field { display: flex; flex-direction: column; gap: .4rem; }
+        .form-field.full { grid-column: 1 / -1; }
+
+        .form-label { font-size: .8rem; color: var(--text-secondary); font-weight: 500; }
+
+        .form-input, .form-textarea {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: .6rem .9rem;
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            font-size: .88rem;
+            outline: none;
+            transition: border-color .2s;
+            width: 100%;
+        }
+
+        .form-input:focus, .form-textarea:focus { border-color: var(--accent-cyan); }
+        .form-textarea { resize: vertical; min-height: 90px; }
+
+        .skills-check-group { display: flex; flex-wrap: wrap; gap: .5rem; }
+
+        .skill-check-label {
+            display: flex;
+            align-items: center;
+            gap: .35rem;
+            font-size: .82rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: .35rem .7rem;
+            transition: border-color .2s, color .2s;
+        }
+
+        .skill-check-label:has(input:checked) {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            background: rgba(0,212,255,.07);
+        }
+
+        .features-list { display: flex; flex-direction: column; gap: .7rem; }
+
+        .feature-row { display: grid; grid-template-columns: 1fr 2fr auto; gap: .5rem; align-items: start; }
+
+        .remove-feature-btn {
+            background: transparent;
+            border: 1px solid rgba(255,80,80,.3);
+            color: #ff6060;
+            border-radius: 6px;
+            padding: .55rem .6rem;
+            cursor: pointer;
+            font-size: .8rem;
+            transition: background .2s;
+        }
+
+        .remove-feature-btn:hover { background: rgba(255,80,80,.1); }
+
+        .add-feature-btn {
+            background: transparent;
+            border: 1px solid rgba(0,212,255,.3);
+            color: var(--accent-cyan);
+            border-radius: 8px;
+            padding: .5rem 1rem;
+            cursor: pointer;
+            font-size: .82rem;
+            font-family: var(--font-sans);
+            transition: background .2s;
+            align-self: flex-start;
+        }
+
+        .add-feature-btn:hover { background: rgba(0,212,255,.07); }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: .75rem;
+            padding-top: .75rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .btn-danger {
+            background: transparent;
+            color: #ff6060;
+            border: 1px solid rgba(255,80,80,.35);
+            margin-right: auto;
+        }
+
+        .btn-danger:hover { background: rgba(255,60,60,.08); border-color: #ff6060; }
+
+        .img-preview {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            display: none;
+            margin-top: .4rem;
+        }
+
+        .img-preview.visible { display: block; }
+
+        @media (max-width: 600px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .feature-row { grid-template-columns: 1fr; }
+            .project-form { padding: 1.5rem 1.2rem; }
+        }
+
         #contacto {
             position: relative;
         }
@@ -1389,7 +1689,114 @@
             <li><a href="#proyectos">Proyectos</a></li>
             <li><a href="#contacto">Contacto</a></li>
         </ul>
+        <div class="nav-editor-area">
+            <span class="editor-badge">● EDITOR</span>
+            <button class="lock-btn" id="lockBtn" onclick="onLockClick()">🔒 Editar</button>
+        </div>
     </nav>
+
+    <!-- Password modal -->
+    <div class="pass-overlay" id="passOverlay">
+        <div class="pass-box">
+            <h3>🔐 Modo editor</h3>
+            <p>Ingresa la contraseña para acceder a las herramientas de edición.</p>
+            <input class="pass-input" id="passInput" type="password" placeholder="Contraseña..." autocomplete="off">
+            <span class="pass-error" id="passError">Contraseña incorrecta.</span>
+            <div style="display:flex;gap:.75rem">
+                <button class="btn btn-primary" style="flex:1" onclick="submitPassword()">Ingresar</button>
+                <button class="btn btn-outline" onclick="closePassModal()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project form overlay -->
+    <div class="form-overlay" id="formOverlay">
+        <form class="project-form" id="projectForm" onsubmit="return false">
+            <div class="form-header">
+                <h2 id="formTitle">Nuevo proyecto</h2>
+                <button class="form-close" type="button" onclick="closeProjectForm()">✕</button>
+            </div>
+
+            <div>
+                <p class="form-section-title">// INFORMACIÓN BÁSICA</p>
+                <div class="form-grid">
+                    <div class="form-field">
+                        <label class="form-label">Nombre del proyecto *</label>
+                        <input class="form-input" id="fName" placeholder="Sistema de visión artificial" required>
+                    </div>
+                    <div class="form-field">
+                        <label class="form-label">Subtítulo / cliente</label>
+                        <input class="form-input" id="fClient" placeholder="Detección de defectos · Manufactura">
+                    </div>
+                    <div class="form-field full">
+                        <label class="form-label">Resumen breve (excerpt) *</label>
+                        <input class="form-input" id="fExcerpt" placeholder="Una línea que describe el proyecto al visitante..." required>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <p class="form-section-title">// DESCRIPCIÓN COMPLETA</p>
+                <div class="form-field">
+                    <label class="form-label">Descripción detallada</label>
+                    <textarea class="form-textarea" id="fDescription" rows="5" placeholder="Explica el problema, tu solución y el impacto generado..."></textarea>
+                </div>
+            </div>
+
+            <div>
+                <p class="form-section-title">// CARACTERÍSTICAS TÉCNICAS</p>
+                <div class="features-list" id="featuresList"></div>
+                <button class="add-feature-btn" type="button" onclick="addFeatureRow()">＋ Añadir característica</button>
+            </div>
+
+            <div>
+                <p class="form-section-title">// TECNOLOGÍAS</p>
+                <div class="form-field">
+                    <label class="form-label">Stack tecnológico (separado por comas)</label>
+                    <input class="form-input" id="fTech" placeholder="Python, PyTorch, YOLO, ROS 2, PLC S7-1500">
+                </div>
+            </div>
+
+            <div>
+                <p class="form-section-title">// CATEGORÍAS</p>
+                <div class="skills-check-group" id="skillsCheckGroup"></div>
+            </div>
+
+            <div>
+                <p class="form-section-title">// IMAGEN DE PORTADA</p>
+                <div class="form-field">
+                    <label class="form-label">URL de la imagen (o ruta relativa: images/carpeta/foto.jpg)</label>
+                    <input class="form-input" id="fImage" placeholder="https://... o images/proyecto/foto.jpg" oninput="previewImage()">
+                    <img class="img-preview" id="imgPreview" alt="Preview">
+                </div>
+            </div>
+
+            <div>
+                <p class="form-section-title">// LINKS</p>
+                <div class="form-grid">
+                    <div class="form-field">
+                        <label class="form-label">GitHub</label>
+                        <input class="form-input" id="fGithub" placeholder="https://github.com/...">
+                    </div>
+                    <div class="form-field">
+                        <label class="form-label">Video demo</label>
+                        <input class="form-input" id="fVideo" placeholder="https://youtube.com/...">
+                    </div>
+                </div>
+            </div>
+
+            <input type="hidden" id="fEditId">
+
+            <div class="form-actions">
+                <button class="btn btn-danger" type="button" id="deleteBtn" onclick="deleteCurrentProject()" style="display:none">Eliminar proyecto</button>
+                <button class="btn btn-outline" type="button" onclick="closeProjectForm()">Cancelar</button>
+                <button class="btn btn-primary" type="button" onclick="saveProjectForm()">Guardar proyecto</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- FAB -->
+    <button class="fab-add" onclick="openProjectForm(null)">＋ Añadir proyecto</button>
 
     <main>
 
@@ -1578,7 +1985,7 @@
             { id: 'robotics', label: 'Robótica Colaborativa' },
         ];
 
-        const PROJECTS = [
+        const HARDCODED_PROJECTS = [
             {
                 id: 'industria 4.0',
                 num: 'proyecto_01',
@@ -1627,6 +2034,261 @@
                 video: null,
             },
         ];
+
+        // Array dinámico (base + extras del editor)
+        let PROJECTS = [];
+
+        /* ══════════════════════════════
+           EDITOR MODE SYSTEM
+        ══════════════════════════════ */
+        // ─── Cambia esta contraseña por la tuya ───
+        const EDITOR_PASSWORD = 'cristhian2025';
+        // ──────────────────────────────────────────
+
+        const EXTRA_KEY = 'portfolio_extra_projects';   // proyectos añadidos desde el editor
+        const EDITS_KEY = 'portfolio_project_edits';    // ediciones a proyectos base
+
+        let editorMode = sessionStorage.getItem('editorMode') === 'true';
+
+        function applyEditorMode() {
+            document.body.classList.toggle('editor-mode', editorMode);
+            const btn = document.getElementById('lockBtn');
+            if (btn) btn.innerHTML = editorMode ? '🔓 Salir' : '🔒 Editar';
+        }
+
+        function onLockClick() {
+            if (editorMode) {
+                editorMode = false;
+                sessionStorage.removeItem('editorMode');
+                applyEditorMode();
+                renderPanel();
+            } else {
+                document.getElementById('passOverlay').classList.add('open');
+                setTimeout(() => document.getElementById('passInput').focus(), 80);
+            }
+        }
+
+        function submitPassword() {
+            const val = document.getElementById('passInput').value;
+            const err = document.getElementById('passError');
+            if (val === EDITOR_PASSWORD) {
+                editorMode = true;
+                sessionStorage.setItem('editorMode', 'true');
+                applyEditorMode();
+                closePassModal();
+                renderPanel();
+            } else {
+                err.classList.add('visible');
+                document.getElementById('passInput').value = '';
+                document.getElementById('passInput').focus();
+            }
+        }
+
+        function closePassModal() {
+            document.getElementById('passOverlay').classList.remove('open');
+            document.getElementById('passInput').value = '';
+            document.getElementById('passError').classList.remove('visible');
+        }
+
+        document.getElementById('passInput').addEventListener('keydown', e => {
+            if (e.key === 'Enter') submitPassword();
+            if (e.key === 'Escape') closePassModal();
+        });
+
+        /* ── Merge PROJECTS with localStorage extras & edits ── */
+        function loadAllProjects() {
+            const edits = JSON.parse(localStorage.getItem(EDITS_KEY) || '{}');
+            const extras = JSON.parse(localStorage.getItem(EXTRA_KEY) || '[]');
+            // Apply edits to base projects
+            const base = HARDCODED_PROJECTS.map(p => edits[p.id] ? { ...p, ...edits[p.id] } : p);
+            return [...base, ...extras];
+        }
+
+        // Rename PROJECTS to HARDCODED_PROJECTS and make PROJECTS dynamic
+        /* (handled below after HARDCODED_PROJECTS is declared) */
+
+        /* ── CRUD ── */
+        function persistProjectEdit(project) {
+            // If it's an extra (not in hardcoded), update extras array
+            const isBase = HARDCODED_PROJECTS.some(p => p.id === project.id);
+            if (isBase) {
+                const edits = JSON.parse(localStorage.getItem(EDITS_KEY) || '{}');
+                edits[project.id] = project;
+                localStorage.setItem(EDITS_KEY, JSON.stringify(edits));
+            } else {
+                const extras = JSON.parse(localStorage.getItem(EXTRA_KEY) || '[]');
+                const idx = extras.findIndex(p => p.id === project.id);
+                if (idx > -1) extras[idx] = project;
+                else extras.push(project);
+                localStorage.setItem(EXTRA_KEY, JSON.stringify(extras));
+            }
+        }
+
+        function deleteProjectById(id) {
+            const isBase = HARDCODED_PROJECTS.some(p => p.id === id);
+            if (isBase) {
+                const edits = JSON.parse(localStorage.getItem(EDITS_KEY) || '{}');
+                delete edits[id];
+                localStorage.setItem(EDITS_KEY, JSON.stringify(edits));
+            } else {
+                const extras = JSON.parse(localStorage.getItem(EXTRA_KEY) || '[]');
+                localStorage.setItem(EXTRA_KEY, JSON.stringify(extras.filter(p => p.id !== id)));
+            }
+            // Remove from highlights if needed
+            const hl = getHighlights().filter(hid => hid !== id);
+            saveHighlights(hl);
+        }
+
+        /* ── Project form ── */
+        let featureCount = 0;
+
+        function openProjectForm(projectId) {
+            if (!editorMode) return;
+            featureCount = 0;
+            document.getElementById('featuresList').innerHTML = '';
+            document.getElementById('fEditId').value = '';
+            document.getElementById('formTitle').textContent = 'Nuevo proyecto';
+            document.getElementById('deleteBtn').style.display = 'none';
+            // Reset fields
+            ['fName','fClient','fExcerpt','fDescription','fTech','fImage','fGithub','fVideo'].forEach(id => {
+                document.getElementById(id).value = '';
+            });
+            document.getElementById('imgPreview').classList.remove('visible');
+
+            // Render skills checkboxes
+            document.getElementById('skillsCheckGroup').innerHTML = SKILLS.map(s =>
+                `<label class="skill-check-label">
+                    <input type="checkbox" value="${s.id}" name="fSkill"> ${s.label}
+                </label>`
+            ).join('');
+
+            if (projectId) {
+                // Edit mode
+                const allP = loadAllProjects();
+                const p = allP.find(x => x.id === projectId);
+                if (!p) return;
+                document.getElementById('formTitle').textContent = 'Editar proyecto';
+                document.getElementById('deleteBtn').style.display = 'inline-flex';
+                document.getElementById('fEditId').value = p.id;
+                document.getElementById('fName').value = p.name || '';
+                document.getElementById('fClient').value = p.client || '';
+                document.getElementById('fExcerpt').value = p.excerpt || '';
+                document.getElementById('fDescription').value = p.description || '';
+                document.getElementById('fTech').value = (p.tech || []).join(', ');
+                document.getElementById('fImage').value = (p.images || [])[0] || '';
+                document.getElementById('fGithub').value = p.github || '';
+                document.getElementById('fVideo').value = p.video || '';
+                previewImage();
+                // Skills
+                document.querySelectorAll('#skillsCheckGroup input[type=checkbox]').forEach(cb => {
+                    cb.checked = (p.skills || []).includes(cb.value);
+                });
+                // Features
+                (p.features || []).forEach(f => addFeatureRow(f.label, f.text));
+            } else {
+                addFeatureRow(); // Start with one empty row
+            }
+
+            document.getElementById('formOverlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProjectForm() {
+            document.getElementById('formOverlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function addFeatureRow(label = '', text = '') {
+            featureCount++;
+            const row = document.createElement('div');
+            row.className = 'feature-row';
+            row.dataset.idx = featureCount;
+            row.innerHTML = `
+                <input class="form-input" placeholder="Título (ej: Visión · Localización)" value="${label}">
+                <textarea class="form-textarea" placeholder="Descripción técnica de esta característica..." rows="2">${text}</textarea>
+                <button class="remove-feature-btn" type="button" onclick="this.parentElement.remove()">✕</button>
+            `;
+            document.getElementById('featuresList').appendChild(row);
+        }
+
+        function previewImage() {
+            const url = document.getElementById('fImage').value.trim();
+            const img = document.getElementById('imgPreview');
+            if (url) {
+                img.src = url;
+                img.classList.add('visible');
+            } else {
+                img.classList.remove('visible');
+            }
+        }
+
+        function saveProjectForm() {
+            const name = document.getElementById('fName').value.trim();
+            const excerpt = document.getElementById('fExcerpt').value.trim();
+            if (!name || !excerpt) {
+                alert('El nombre y el resumen son obligatorios.');
+                return;
+            }
+
+            const editId = document.getElementById('fEditId').value;
+            const allP = loadAllProjects();
+            const existing = editId ? allP.find(p => p.id === editId) : null;
+
+            // Generate ID from name if new
+            const id = editId || name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '').slice(0, 40);
+
+            // Auto num
+            const num = existing?.num || `proyecto_${String(allP.length + 1).padStart(2, '0')}`;
+
+            const features = Array.from(document.querySelectorAll('#featuresList .feature-row')).map(row => ({
+                label: row.querySelectorAll('input')[0].value.trim(),
+                text: row.querySelectorAll('textarea')[0].value.trim(),
+            })).filter(f => f.text);
+
+            const selectedSkills = Array.from(document.querySelectorAll('#skillsCheckGroup input:checked')).map(cb => cb.value);
+            const techRaw = document.getElementById('fTech').value;
+            const tech = techRaw.split(',').map(t => t.trim()).filter(Boolean);
+
+            const imageUrl = document.getElementById('fImage').value.trim();
+
+            const project = {
+                id,
+                num,
+                name,
+                client: document.getElementById('fClient').value.trim(),
+                featured: existing?.featured ?? false,
+                skills: selectedSkills,
+                images: imageUrl ? [imageUrl] : [],
+                excerpt,
+                description: document.getElementById('fDescription').value.trim(),
+                features,
+                tech,
+                github: document.getElementById('fGithub').value.trim() || null,
+                video: document.getElementById('fVideo').value.trim() || null,
+            };
+
+            persistProjectEdit(project);
+            closeProjectForm();
+            // Reload projects and re-render
+            window.PROJECTS = loadAllProjects();
+            renderFeatured();
+            renderTabs();
+            renderPanel();
+        }
+
+        function deleteCurrentProject() {
+            const id = document.getElementById('fEditId').value;
+            if (!id) return;
+            if (!confirm('¿Eliminar este proyecto del portafolio?')) return;
+            deleteProjectById(id);
+            window.PROJECTS = loadAllProjects();
+            closeProjectForm();
+            renderFeatured();
+            renderTabs();
+            renderPanel();
+        }
+
+        applyEditorMode();
 
         /* ══════════════════════════════
            HIGHLIGHTS — localStorage
@@ -1731,6 +2393,7 @@
             <div class="mini-card" onclick="openModal('${p.id}')" style="position:relative">
               ${imgHtml}
               <button class="highlight-btn${isHL ? ' active' : ''}" title="${isHL ? 'Quitar de destacados' : 'Marcar como destacado'}" onclick="toggleHighlight('${p.id}', event)">⭐</button>
+              <button class="edit-btn" title="Editar proyecto" onclick="openProjectForm('${p.id}');event.stopPropagation()">✏️</button>
               <div class="mini-body">
                 <p class="mini-num">${p.num}</p>
                 <p class="mini-name">${p.name}</p>
@@ -1852,6 +2515,7 @@
         });
 
         /* ── Init ── */
+        PROJECTS = loadAllProjects();
         renderFeatured();
         renderTabs();
         renderPanel();
