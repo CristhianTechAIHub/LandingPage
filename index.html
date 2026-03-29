@@ -809,6 +809,93 @@
             color: var(--accent-cyan);
         }
 
+        /* Skill tab editor controls */
+        .skill-tab-wrap {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .skill-tab-actions {
+            display: none;
+            align-items: center;
+            gap: .15rem;
+            margin-left: .4rem;
+        }
+
+        body.editor-mode .skill-tab-actions {
+            display: inline-flex;
+        }
+
+        .skill-tab-action {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: .72rem;
+            padding: .15rem .2rem;
+            border-radius: 4px;
+            transition: color .2s, background .2s;
+            line-height: 1;
+        }
+
+        .skill-tab-action:hover { color: var(--accent-cyan); background: rgba(0,212,255,.1); }
+        .skill-tab-action.del:hover { color: #ff6060; background: rgba(255,60,60,.1); }
+
+        /* Add skill button */
+        .add-skill-btn {
+            display: none;
+            font-family: var(--font-mono);
+            font-size: .78rem;
+            padding: .5rem 1rem;
+            border-radius: 100px;
+            border: 1px dashed rgba(0,212,255,.35);
+            background: transparent;
+            color: var(--accent-cyan);
+            cursor: pointer;
+            transition: all .25s;
+        }
+
+        body.editor-mode .add-skill-btn { display: inline-flex; align-items: center; gap: .3rem; }
+        .add-skill-btn:hover { background: rgba(0,212,255,.07); border-color: var(--accent-cyan); }
+
+        /* Skill form inline modal */
+        .skill-form-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(5,10,20,.8);
+            backdrop-filter: blur(6px);
+            z-index: 950;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .skill-form-overlay.open { display: flex; }
+
+        .skill-form-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 420px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+        }
+
+        .skill-form-box h3 { font-size: 1rem; font-weight: 700; }
+
+        /* Validation error */
+        .field-error {
+            font-size: .78rem;
+            color: #ff6060;
+            display: none;
+            margin-top: .2rem;
+        }
+
+        .field-error.visible { display: block; }
+
         .projects-panel {
             min-height: 260px;
         }
@@ -1760,6 +1847,7 @@
             <div>
                 <p class="form-section-title">// CATEGORÍAS</p>
                 <div class="skills-check-group" id="skillsCheckGroup"></div>
+                <span class="field-error" id="skillsError">Por favor, seleccione la especialidad del proyecto.</span>
             </div>
 
             <div>
@@ -1797,6 +1885,23 @@
 
     <!-- FAB -->
     <button class="fab-add" onclick="openProjectForm(null)">＋ Añadir proyecto</button>
+
+    <!-- Skill form modal -->
+    <div class="skill-form-overlay" id="skillFormOverlay">
+        <div class="skill-form-box">
+            <h3 id="skillFormTitle">Nueva especialidad</h3>
+            <div class="form-field">
+                <label class="form-label">Nombre de la especialidad *</label>
+                <input class="form-input" id="skillNameInput" placeholder="Ej: Control Industrial" maxlength="40">
+                <span class="field-error" id="skillNameError">Por favor, ingresa un nombre para la especialidad.</span>
+            </div>
+            <input type="hidden" id="skillEditId">
+            <div style="display:flex;gap:.75rem;justify-content:flex-end">
+                <button class="btn btn-outline" onclick="closeSkillForm()">Cancelar</button>
+                <button class="btn btn-primary" onclick="saveSkillForm()">Guardar</button>
+            </div>
+        </div>
+    </div>
 
     <main>
 
@@ -1977,13 +2082,106 @@
         /* ══════════════════════════════
            DATA
         ══════════════════════════════ */
-        const SKILLS = [
+        const HARDCODED_SKILLS = [
             { id: 'machine-learning', label: 'Machine Learning' },
             { id: 'computer-vision', label: 'Visión por Computadora' },
             { id: 'ai-agents', label: 'Agentes de IA' },
             { id: 'automation', label: 'Automatización Industrial' },
             { id: 'robotics', label: 'Robótica Colaborativa' },
         ];
+
+        const SKILLS_KEY = 'portfolio_skills';
+
+        function loadAllSkills() {
+            try {
+                const stored = JSON.parse(localStorage.getItem(SKILLS_KEY));
+                if (Array.isArray(stored) && stored.length) return stored;
+            } catch (_) {}
+            return [...HARDCODED_SKILLS];
+        }
+
+        function saveSkills(skills) {
+            localStorage.setItem(SKILLS_KEY, JSON.stringify(skills));
+        }
+
+        let SKILLS = loadAllSkills();
+
+        /* ── Skill form ── */
+        function openSkillForm(skillId = null) {
+            document.getElementById('skillNameInput').value = '';
+            document.getElementById('skillEditId').value = '';
+            document.getElementById('skillNameError').classList.remove('visible');
+            if (skillId) {
+                const s = SKILLS.find(x => x.id === skillId);
+                if (s) {
+                    document.getElementById('skillFormTitle').textContent = 'Editar especialidad';
+                    document.getElementById('skillNameInput').value = s.label;
+                    document.getElementById('skillEditId').value = s.id;
+                }
+            } else {
+                document.getElementById('skillFormTitle').textContent = 'Nueva especialidad';
+            }
+            document.getElementById('skillFormOverlay').classList.add('open');
+            setTimeout(() => document.getElementById('skillNameInput').focus(), 80);
+        }
+
+        function closeSkillForm() {
+            document.getElementById('skillFormOverlay').classList.remove('open');
+        }
+
+        function saveSkillForm() {
+            const label = document.getElementById('skillNameInput').value.trim();
+            const err = document.getElementById('skillNameError');
+            if (!label) { err.classList.add('visible'); return; }
+            err.classList.remove('visible');
+
+            const editId = document.getElementById('skillEditId').value;
+            if (editId) {
+                const s = SKILLS.find(x => x.id === editId);
+                if (s) s.label = label;
+            } else {
+                const newId = label.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+                if (SKILLS.some(s => s.id === newId)) {
+                    err.textContent = 'Ya existe una especialidad con ese nombre.';
+                    err.classList.add('visible');
+                    return;
+                }
+                SKILLS.push({ id: newId, label });
+            }
+            saveSkills(SKILLS);
+            closeSkillForm();
+            if (!SKILLS.find(s => s.id === activeSkill)) activeSkill = SKILLS[0]?.id;
+            renderTabs();
+            renderPanel();
+            // Refresh skills checkboxes if project form is open
+            if (document.getElementById('skillsCheckGroup').children.length) {
+                refreshSkillsCheckboxes();
+            }
+        }
+
+        function deleteSkill(skillId) {
+            if (SKILLS.length <= 1) { alert('Debe existir al menos una especialidad.'); return; }
+            if (!confirm('¿Eliminar esta especialidad? Los proyectos que solo tengan esta especialidad dejarán de aparecer en ese filtro.')) return;
+            SKILLS = SKILLS.filter(s => s.id !== skillId);
+            saveSkills(SKILLS);
+            if (activeSkill === skillId) activeSkill = SKILLS[0].id;
+            renderTabs();
+            renderPanel();
+        }
+
+        function refreshSkillsCheckboxes() {
+            const currentChecked = Array.from(document.querySelectorAll('#skillsCheckGroup input:checked')).map(cb => cb.value);
+            document.getElementById('skillsCheckGroup').innerHTML = SKILLS.map(s =>
+                `<label class="skill-check-label">
+                    <input type="checkbox" value="${s.id}" name="fSkill"${currentChecked.includes(s.id) ? ' checked' : ''}> ${s.label}
+                </label>`
+            ).join('');
+        }
+
+        document.getElementById('skillNameInput').addEventListener('keydown', e => {
+            if (e.key === 'Enter') saveSkillForm();
+            if (e.key === 'Escape') closeSkillForm();
+        });
 
         const HARDCODED_PROJECTS = [
             {
@@ -2230,6 +2428,15 @@
                 return;
             }
 
+            const selectedSkills = Array.from(document.querySelectorAll('#skillsCheckGroup input:checked')).map(cb => cb.value);
+            const skillsErr = document.getElementById('skillsError');
+            if (!selectedSkills.length) {
+                skillsErr.classList.add('visible');
+                document.getElementById('skillsCheckGroup').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+            skillsErr.classList.remove('visible');
+
             const editId = document.getElementById('fEditId').value;
             const allP = loadAllProjects();
             const existing = editId ? allP.find(p => p.id === editId) : null;
@@ -2245,7 +2452,6 @@
                 text: row.querySelectorAll('textarea')[0].value.trim(),
             })).filter(f => f.text);
 
-            const selectedSkills = Array.from(document.querySelectorAll('#skillsCheckGroup input:checked')).map(cb => cb.value);
             const techRaw = document.getElementById('fTech').value;
             const tech = techRaw.split(',').map(t => t.trim()).filter(Boolean);
 
@@ -2365,8 +2571,16 @@
         function renderTabs() {
             const container = document.getElementById('skillTabs');
             container.innerHTML = SKILLS.map(s => `
-        <button class="skill-tab${s.id === activeSkill ? ' active' : ''}" onclick="selectSkill('${s.id}')">${s.label}</button>
-      `).join('');
+        <span class="skill-tab-wrap">
+          <button class="skill-tab${s.id === activeSkill ? ' active' : ''}" onclick="selectSkill('${s.id}')">
+            ${s.label}
+            <span class="skill-tab-actions">
+              <span class="skill-tab-action" title="Editar" onclick="openSkillForm('${s.id}');event.stopPropagation()">✏</span>
+              <span class="skill-tab-action del" title="Eliminar" onclick="deleteSkill('${s.id}');event.stopPropagation()">✕</span>
+            </span>
+          </button>
+        </span>
+      `).join('') + `<button class="add-skill-btn" onclick="openSkillForm()">＋ Nueva especialidad</button>`;
         }
 
         function renderPanel() {
