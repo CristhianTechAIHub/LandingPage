@@ -394,8 +394,8 @@
         }
 
         .flip-card {
-            width: 250px;
-            height: 360px;
+            width: 300px;
+            height: 420px;
             perspective: 1200px;
             cursor: pointer;
             position: relative;
@@ -424,8 +424,12 @@
         }
 
         .flip-front {
-            border: 1px solid var(--border-color);
-            position: relative;
+            border: 1px solid rgba(0,212,255,.25);
+            box-shadow:
+                0 0 0 1px rgba(123,47,255,.15),
+                0 8px 32px rgba(0,0,0,.6),
+                0 0 60px rgba(0,212,255,.08),
+                inset 0 1px 0 rgba(255,255,255,.04);
         }
 
         .flip-front::before {
@@ -433,8 +437,12 @@
             position: absolute;
             inset: 0;
             border-radius: 16px;
-            padding: 1px;
-            background: linear-gradient(150deg, rgba(0, 212, 255, .5), rgba(123, 47, 255, .35), transparent 55%);
+            padding: 1.5px;
+            background: linear-gradient(150deg,
+                rgba(0,212,255,.75) 0%,
+                rgba(123,47,255,.5) 45%,
+                rgba(0,255,136,.2) 80%,
+                transparent 100%);
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -451,14 +459,33 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            position: relative;
         }
 
         .flip-front-inner img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: top center;
+            object-position: center 15%;
             display: block;
+            filter: contrast(1.05) saturate(0.92);
+        }
+
+        /* degradado inferior sobre la foto */
+        .flip-front-inner::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(to bottom,
+                    transparent 45%,
+                    rgba(5,10,20,.55) 75%,
+                    rgba(5,10,20,.92) 100%),
+                linear-gradient(to right,
+                    rgba(0,212,255,.06) 0%,
+                    transparent 40%,
+                    rgba(123,47,255,.06) 100%);
+            pointer-events: none;
         }
 
         .flip-ph {
@@ -518,17 +545,18 @@
             background: var(--bg-card);
             border: 1px solid rgba(0, 212, 255, .22);
             transform: rotateY(180deg);
-            padding: 1.6rem 1.5rem;
+            padding: 1.8rem 1.6rem;
             display: flex;
             flex-direction: column;
-            gap: 0;
+            justify-content: space-between;
             box-shadow: 0 0 40px rgba(0, 212, 255, .08);
         }
 
         .flip-back-section {
             display: flex;
             flex-direction: column;
-            gap: .28rem;
+            gap: .35rem;
+            flex: 1;
         }
 
         .flip-back-label {
@@ -541,23 +569,23 @@
         }
 
         .flip-back-company {
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: var(--text-primary);
         }
 
         .flip-back-role {
-            font-size: .73rem;
+            font-size: .78rem;
             color: var(--text-secondary);
-            line-height: 1.55;
+            line-height: 1.6;
         }
 
         .flip-back-period {
             font-family: var(--font-mono);
-            font-size: .65rem;
+            font-size: .68rem;
             color: var(--accent-cyan);
-            opacity: .75;
-            margin-top: .25rem;
+            opacity: .85;
+            margin-top: .4rem;
             display: inline-flex;
             align-items: center;
             gap: .3rem;
@@ -575,21 +603,23 @@
 
         .flip-divider {
             height: 1px;
-            background: var(--border-color);
-            margin: 1.1rem 0;
+            background: linear-gradient(90deg, rgba(0,212,255,.35), transparent);
+            margin: 1.4rem 0;
+            flex-shrink: 0;
         }
 
         .flip-back-uni {
-            font-size: .78rem;
+            font-size: .85rem;
             font-weight: 600;
             color: var(--text-primary);
             line-height: 1.4;
         }
 
         .flip-back-degree {
-            font-size: .7rem;
+            font-size: .75rem;
             color: var(--text-secondary);
-            margin-top: .2rem;
+            margin-top: .3rem;
+            line-height: 1.5;
         }
 
         .flip-location {
@@ -597,11 +627,13 @@
             align-items: center;
             gap: .35rem;
             font-family: var(--font-mono);
-            font-size: .62rem;
+            font-size: .65rem;
             color: var(--text-secondary);
-            opacity: .55;
-            margin-top: auto;
-            padding-top: 1rem;
+            opacity: .6;
+            flex-shrink: 0;
+            padding-top: .8rem;
+            border-top: 1px solid rgba(255,255,255,.05);
+            margin-top: 1.2rem;
         }
 
         /* ── Section headings ── */
@@ -1964,14 +1996,7 @@
                         <div class="flip-card-inner">
                             <div class="flip-front">
                                 <div class="flip-front-inner">
-                                    <!--
-                    Para usar tu foto real, reemplaza el div.flip-ph por:
-                    <img src="images/foto.jpg" alt="Cristhian Campos">
-                  -->
-                                    <div class="flip-ph">
-                                        <span class="flip-ph-initials">CMC</span>
-                                        <span class="flip-ph-hint">foto de perfil</span>
-                                    </div>
+                                    <img src="images/foto_perfil/FOTO CRISTHIAN.png" alt="Cristhian Campos" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;display:block;">
                                 </div>
                                 <span class="flip-hint-badge">hover · ver perfil ↻</span>
                             </div>
