@@ -1376,6 +1376,23 @@
         body.editor-mode .lock-btn { border-color: rgba(255,60,60,.4); color: #ff6060; }
         body.editor-mode .lock-btn:hover { border-color: #ff6060; background: rgba(255,60,60,.07); }
 
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            border-radius: 8px;
+            padding: .4rem .7rem;
+            font-size: .82rem;
+            cursor: pointer;
+            transition: all .2s;
+            font-family: var(--font-sans);
+            letter-spacing: .02em;
+            display: flex;
+            align-items: center;
+            gap: .3rem;
+        }
+        .lang-btn:hover { border-color: var(--accent-purple); color: var(--accent-purple); }
+
         .pass-overlay {
             display: none;
             position: fixed;
@@ -1804,13 +1821,14 @@
     <nav>
         <a class="nav-logo" href="#hero">cristhian<span>.campos</span></a>
         <ul class="nav-links">
-            <li><a href="#destacados">Destacados</a></li>
-            <li><a href="#proyectos">Proyectos</a></li>
-            <li><a href="#contacto">Contacto</a></li>
+            <li><a href="#destacados">Highlights</a></li>
+            <li><a href="#proyectos">Projects</a></li>
+            <li><a href="#contacto">Contact</a></li>
         </ul>
         <div class="nav-editor-area">
+            <button class="lang-btn" id="langBtn" onclick="toggleLanguage()" title="Switch language">🇵🇪 ES</button>
             <span class="editor-badge">● EDITOR</span>
-            <button class="lock-btn" id="lockBtn" onclick="onLockClick()">🔒 Editar</button>
+            <button class="lock-btn" id="lockBtn" onclick="onLockClick()">🔒 Edit</button>
         </div>
     </nav>
 
@@ -1945,35 +1963,35 @@
 
                 <!-- Text -->
                 <div class="hero-content">
-                    <p class="hero-eyebrow">// Ingeniero Mecatrónico · Edge AI &amp; Automatización Industrial</p>
+                    <p class="hero-eyebrow">// Mechatronic Engineer · Edge AI &amp; Industrial Automation</p>
                     <h1 class="hero-headline">
-                        Integrando la inteligencia artificial<br>
-                        <span class="gradient">al corazón de la industria</span>
+                        Integrating artificial intelligence<br>
+                        <span class="gradient">to the heart of industry</span>
                     </h1>
                     <p class="hero-sub">
-                        Especialista en Edge AI, Visión por Computadora y Sistemas de Control Críticos.
-                        Transformo datos industriales en acciones autónomas con precisión milimétrica.
+                        Specialist in Edge AI, Computer Vision and Critical Control Systems.
+                        I transform industrial data into autonomous actions with millimeter-level precision.
                     </p>
                     <div class="hero-metrics">
                         <div class="hero-metric">
                             <span class="hero-metric-num">1+</span>
-                            <span class="hero-metric-label">años en IA industrial</span>
+                            <span class="hero-metric-label">years in industrial AI</span>
                         </div>
                         <div class="hero-metric">
                             <span class="hero-metric-num">5+</span>
-                            <span class="hero-metric-label">tecnologías integradas</span>
+                            <span class="hero-metric-label">integrated technologies</span>
                         </div>
                         <div class="hero-metric">
                             <span class="hero-metric-num">2</span>
-                            <span class="hero-metric-label">sistemas en producción</span>
+                            <span class="hero-metric-label">systems in production</span>
                         </div>
                         <div class="hero-metric">
                             <span class="hero-metric-num">100%</span>
-                            <span class="hero-metric-label">orientado a resultados</span>
+                            <span class="hero-metric-label">results-oriented</span>
                         </div>
                     </div>
                     <div class="hero-cta">
-                        <a href="#proyectos" class="btn btn-primary">Ver proyectos</a>
+                        <a href="#proyectos" class="btn btn-primary">View projects</a>
                         <a href="https://www.linkedin.com/in/cristhian-moises-campos-neyra-a8bb27257" target="_blank"
                             rel="noopener" class="btn btn-outline">LinkedIn ↗</a>
                     </div>
@@ -1981,12 +1999,12 @@
                         <span class="hero-tag">Edge AI</span>
                         <span class="hero-tag">Computer Vision</span>
                         <span class="hero-tag">Machine Learning</span>
-                        <span class="hero-tag">Sistemas de Control</span>
-                        <span class="hero-tag">Industria 4.0</span>
-                        <span class="hero-tag">Robótica Colaborativa</span>
+                        <span class="hero-tag">Control Systems</span>
+                        <span class="hero-tag">Industry 4.0</span>
+                        <span class="hero-tag">Collaborative Robotics</span>
                         <span class="hero-tag">NVIDIA Jetson</span>
                         <span class="hero-tag">ROS 2</span>
-                        <span class="hero-tag">Analítica Predictiva</span>
+                        <span class="hero-tag">Predictive Analytics</span>
                     </div>
                 </div>
 
@@ -1998,21 +2016,20 @@
                                 <div class="flip-front-inner">
                                     <img src="images/foto_perfil/FOTO CRISTHIAN.png" alt="Cristhian Campos" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;display:block;">
                                 </div>
-                                <span class="flip-hint-badge">hover · ver perfil ↻</span>
+                                <span class="flip-hint-badge">hover · view profile ↻</span>
                             </div>
                             <div class="flip-back">
                                 <div class="flip-back-section">
-                                    <span class="flip-back-label">// experiencia</span>
+                                    <span class="flip-back-label">// experience</span>
                                     <span class="flip-back-company">DINAUT</span>
-                                    <span class="flip-back-role">Desarrollo completo e integración de software con
-                                        hardware en sistemas de automatización e IA industrial.</span>
-                                    <span class="flip-back-period">2024 – Presente</span>
+                                    <span class="flip-back-role">Full development and integration of software with hardware in industrial automation and AI systems.</span>
+                                    <span class="flip-back-period">2024 – Present</span>
                                 </div>
                                 <div class="flip-divider"></div>
                                 <div class="flip-back-section">
-                                    <span class="flip-back-label">// educación</span>
+                                    <span class="flip-back-label">// education</span>
                                     <span class="flip-back-uni">Pontificia Universidad Católica del Perú</span>
-                                    <span class="flip-back-degree">Bachiller en Ingeniería Mecatrónica</span>
+                                    <span class="flip-back-degree">Bachelor in Mechatronic Engineering</span>
                                 </div>
                                 <div class="flip-location"><span>📍</span><span>Lima, Perú</span></div>
                             </div>
@@ -2027,10 +2044,9 @@
          FEATURED PROJECTS
     ══════════════════════════════ -->
         <section id="destacados">
-            <p class="section-eyebrow reveal">// mejores proyectos</p>
-            <h2 class="section-title reveal">Proyectos Destacados</h2>
-            <p class="section-sub reveal">Los proyectos que mejor representan mi trabajo en la intersección de la IA y
-                la automatización industrial.</p>
+            <p class="section-eyebrow reveal">// best projects</p>
+            <h2 class="section-title reveal">Featured Projects</h2>
+            <p class="section-sub reveal">The projects that best represent my work at the intersection of AI and industrial automation.</p>
 
             <div class="featured-grid" id="featuredGrid">
                 <!-- Rendered by JS -->
@@ -2041,9 +2057,9 @@
          PROJECTS BY SKILL
     ══════════════════════════════ -->
         <section id="proyectos">
-            <p class="section-eyebrow reveal">// portafolio completo</p>
-            <h2 class="section-title reveal">Mis Proyectos</h2>
-            <p class="section-sub reveal">Elige una tecnología y descubre qué he construido con ella.</p>
+            <p class="section-eyebrow reveal">// portfolio</p>
+            <h2 class="section-title reveal">My Projects</h2>
+            <p class="section-sub reveal">Choose a technology and discover what I've built with it.</p>
 
             <div class="skill-tabs" id="skillTabs">
                 <!-- Rendered by JS -->
@@ -2063,17 +2079,14 @@
         <section id="contacto">
             <div class="contact-card reveal">
                 <div class="contact-left">
-                    <p class="section-eyebrow" style="margin-bottom:1rem;">// hablemos</p>
-                    <h2 class="contact-title">¿Cómo puedo ayudarte a<br><span class="gradient">optimizar tus
-                            procesos?</span></h2>
+                    <p class="section-eyebrow" style="margin-bottom:1rem;">// let's talk</p>
+                    <h2 class="contact-title">How can I help you optimize<br><span class="gradient">your processes?</span></h2>
                     <p class="contact-text">
-                        Estoy disponible para proyectos de consultoría, colaboraciones en I+D y oportunidades laborales
-                        en
-                        inteligencia artificial aplicada, automatización industrial y robótica.
+                        Available for consulting projects, R&amp;D collaborations and job opportunities in applied artificial intelligence, industrial automation and robotics.
                     </p>
                 </div>
                 <div class="contact-right">
-                    <span class="contact-availability">Disponible para nuevos proyectos</span>
+                    <span class="contact-availability">Available for new projects</span>
                     <div class="contact-links">
                         <a href="https://www.linkedin.com/in/cristhian-moises-campos-neyra-a8bb27257" target="_blank"
                             rel="noopener" class="btn btn-primary">LinkedIn ↗</a>
@@ -2108,11 +2121,11 @@
            DATA
         ══════════════════════════════ */
         const HARDCODED_SKILLS = [
-            { id: 'machine-learning', label: 'Machine Learning' },
-            { id: 'computer-vision', label: 'Visión por Computadora' },
-            { id: 'ai-agents', label: 'Agentes de IA' },
-            { id: 'automation', label: 'Automatización Industrial' },
-            { id: 'robotics', label: 'Robótica Colaborativa' },
+            { id: 'machine-learning', label: 'Machine Learning',          labelEn: 'Machine Learning' },
+            { id: 'computer-vision', label: 'Visión por Computadora',     labelEn: 'Computer Vision' },
+            { id: 'ai-agents',       label: 'Agentes de IA',              labelEn: 'AI Agents' },
+            { id: 'automation',      label: 'Automatización Industrial',   labelEn: 'Industrial Automation' },
+            { id: 'robotics',        label: 'Robótica Colaborativa',       labelEn: 'Collaborative Robotics' },
         ];
 
         const SKILLS_KEY = 'portfolio_skills';
@@ -2213,7 +2226,9 @@
                 id: 'industria 4.0',
                 num: 'proyecto_01',
                 name: 'Módulo de Industria 4.0',
+                nameEn: 'Industry 4.0 Module',
                 client: 'Arquitectura Edge AI + Robótica Colaborativa',
+                clientEn: 'Edge AI Architecture + Collaborative Robotics',
                 featured: true,
                 skills: ['machine-learning', 'computer-vision', 'automation', 'robotics'],
                 images: [
@@ -2222,12 +2237,20 @@
                     'images/senati/senati3.jpeg',
                 ],
                 excerpt: 'Celda industrial con arquitectura Edge AI heterogénea donde una Jetson, una IPC y un PLC trabajan en conjunto para guiar un cobot con precisión milimétrica.',
+                excerptEn: 'Industrial cell with heterogeneous Edge AI architecture where a Jetson, IPC and PLC work together to guide a cobot with millimeter-level precision.',
                 description: 'La IA no como módulo aislado, sino como el cerebro de la automatización. Celda industrial con arquitectura heterogénea donde una Jetson, una IPC y un PLC hablan el mismo idioma para guiar un cobot con precisión milimétrica — convirtiendo una "curiosidad de laboratorio" en una solución de ingeniería robusta.',
+                descriptionEn: 'AI not as an isolated module, but as the brain of automation. Industrial cell with heterogeneous architecture where a Jetson, IPC and PLC speak the same language to guide a cobot with millimeter precision — turning a laboratory experiment into a robust engineering solution.',
                 features: [
                     { label: 'Seguridad y Gateway · Edge AI', text: 'NVIDIA Jetson Xavier NX como punto de entrada inteligente de la celda: autenticación biométrica por reconocimiento facial y gestión centralizada del flujo de comunicación con el PLC S7-1500 mediante protocolos TCP/IP industriales robustos.' },
                     { label: 'Visión para la Acción · Localización', text: 'Pipeline de segmentación de instancias procesado en una IPC Industrial para detección y localización de piezas en escena. Lógica de transformación de coordenadas de píxeles a posiciones 3D con precisión milimétrica para el cobot.' },
                     { label: 'Monitoreo en Tiempo Real · HMI', text: 'Webserver embebido para visualización en vivo de inferencias del modelo de visión. Supervisión, diagnóstico y ajuste de parámetros desde cualquier dispositivo de la red industrial.' },
                     { label: 'Control de Calidad · Clasificación en el Borde', text: 'Módulo TM NPU de Siemens integrado en el ciclo de control del PLC ejecutando ResNet-50 en tiempo real. Decisiones deterministas dentro del ciclo de PLC sin latencias externas críticas.' },
+                ],
+                featuresEn: [
+                    { label: 'Security & Gateway · Edge AI', text: 'NVIDIA Jetson Xavier NX as the intelligent entry point: biometric authentication via facial recognition and centralized communication flow management with the S7-1500 PLC through robust industrial TCP/IP protocols.' },
+                    { label: 'Vision for Action · Localization', text: 'Instance segmentation pipeline on an Industrial IPC for piece detection and scene localization. Coordinate transformation logic from pixels to 3D positions with millimeter-level precision for the cobot.' },
+                    { label: 'Real-Time Monitoring · HMI', text: 'Embedded webserver for live visualization of vision model inferences. Monitoring, diagnostics and parameter adjustment from any device on the industrial network.' },
+                    { label: 'Quality Control · Edge Classification', text: 'Siemens TM NPU module integrated in the PLC control cycle running ResNet-50 in real time. Deterministic decisions within the PLC cycle without critical external latencies.' },
                 ],
                 tech: ['Python', 'YOLOv8', 'ResNet-50', 'Jetson Xavier NX', 'IPC Industrial', 'TM NPU Siemens', 'PLC S7-1500', 'TIA Portal', 'Universal Robots', 'TCP/IP', 'OpenCV'],
                 github: null,
@@ -2237,7 +2260,9 @@
                 id: 'mantenimiento',
                 num: 'proyecto_02',
                 name: 'Sistema de Sincronización de Mantenimiento Predictivo',
+                nameEn: 'Predictive Maintenance Synchronization System',
                 client: 'Gestión de Mantenimiento · IA + Bases de Datos Heterogéneas',
+                clientEn: 'Maintenance Management · AI + Heterogeneous Databases',
                 featured: true,
                 skills: ['machine-learning', 'automation'],
                 images: [
@@ -2245,16 +2270,54 @@
                 ],
                 imagePlaceholder: { icon: '🔄', label: 'Pipeline de sincronización multi-GMAO' },
                 excerpt: 'Plataforma de sincronización bidireccional entre dos sistemas GMAO con detección automática de anomalías mediante Transformer entrenado sobre series temporales industriales.',
+                excerptEn: 'Bidirectional synchronization platform between two CMMS with automatic anomaly detection via a Transformer trained on industrial time series.',
                 description: 'Plataforma de sincronización bidireccional entre dos sistemas de gestión de mantenimiento (GMAO), con detección automática de anomalías mediante un modelo Transformer entrenado sobre series temporales de sensores industriales. Las anomalías detectadas disparan automáticamente la creación de órdenes de trabajo en ambos sistemas.',
+                descriptionEn: 'Bidirectional synchronization platform between two computerized maintenance management systems (CMMS), with automatic anomaly detection via a Transformer model trained on industrial sensor time series. Detected anomalies automatically trigger work order creation in both systems.',
                 features: [
                     { label: 'Integración de Datos · Multi-GMAO', text: 'Pipeline unificado sobre bases de datos heterogéneas: Oracle, PostgreSQL, SQL Server e InfluxDB en un único flujo bidireccional.' },
                     { label: 'Detección de Anomalías · Transformer', text: 'Modelo Transformer entrenado sobre series temporales de sensores industriales para identificar patrones de fallo con alta precisión.' },
                     { label: 'Automatización de OT · Órdenes de Trabajo', text: 'Las anomalías detectadas disparan automáticamente la creación de órdenes de trabajo en el sistema maestro con reflejo instantáneo en el sistema esclavo.' },
                     { label: 'Aprendizaje Continuo · Sin Intervención Manual', text: 'El modelo se re-entrena de forma autónoma con datos históricos almacenados en InfluxDB, mejorando progresivamente su precisión en producción.' },
                 ],
+                featuresEn: [
+                    { label: 'Data Integration · Multi-CMMS', text: 'Unified pipeline over heterogeneous databases: Oracle, PostgreSQL, SQL Server and InfluxDB in a single bidirectional flow.' },
+                    { label: 'Anomaly Detection · Transformer', text: 'Transformer model trained on industrial sensor time series to identify failure patterns with high precision.' },
+                    { label: 'WO Automation · Work Orders', text: 'Detected anomalies automatically trigger work order creation in the master system with instant reflection in the slave system.' },
+                    { label: 'Continuous Learning · No Manual Intervention', text: 'The model autonomously retrains with historical data stored in InfluxDB, progressively improving its precision in production.' },
+                ],
                 tech: ['Python', 'Transformer', 'PyTorch', 'Oracle', 'PostgreSQL', 'SQL Server', 'InfluxDB'],
                 github: null,
                 video: null,
+            },
+            {
+                id: 'agente-plc',
+                num: 'proyecto_03',
+                name: 'Industrial RAG Agent',
+                nameEn: 'Industrial RAG Agent',
+                client: 'Agentes de IA · Documentación Técnica Industrial',
+                clientEn: 'AI Agents · Industrial Technical Documentation',
+                featured: false,
+                skills: ['ai-agents', 'machine-learning'],
+                images: ['images/Agente_IA/WhatsApp Image 2026-04-22 at 2.35.44 PM.jpeg'],
+                excerpt: 'Agente conversacional de IA que responde preguntas técnicas precisas sobre manuales industriales Siemens S7-1500, citando documento y página fuente para garantizar trazabilidad.',
+                excerptEn: 'Conversational AI agent that accurately answers technical questions about Siemens S7-1500 industrial manuals, citing the source document and page for full traceability.',
+                description: 'Un agente conversacional de Inteligencia Artificial diseñado para extraer, analizar y responder preguntas técnicas precisas basadas en documentación industrial compleja (manuales de Siemens S7-1500 TM NPU). Elimina horas de búsqueda manual dentro de PDFs de cientos de páginas mediante consultas en lenguaje natural con respuestas trazables.',
+                descriptionEn: 'A conversational AI agent designed to extract, analyze and accurately answer technical questions based on complex industrial documentation (Siemens S7-1500 TM NPU manuals). Eliminates hours of manual searching through hundreds-of-pages PDFs via natural language queries with fully traceable responses.',
+                features: [
+                    { label: 'Orquestación · Agente', text: 'Arquitectura RAG local con LangGraph y LangChain para gestión del estado y las herramientas del agente. Motor de razonamiento Claude 3.5 Haiku (Anthropic API) con ToolStrategy para salidas estructuradas estrictas.' },
+                    { label: 'Vectorización Local · Privacidad', text: 'Modelos de HuggingFace (all-MiniLM-L6-v2) ejecutados en CPU para garantizar la privacidad de los documentos industriales sin envío a servicios externos.' },
+                    { label: 'Búsqueda Semántica · FAISS', text: 'Base de datos vectorial FAISS (Facebook AI Similarity Search) en memoria para recuperaciones de latencia ultrabaja sobre fragmentos indexados de manuales PDF.' },
+                    { label: 'Trazabilidad · Sin Alucinaciones', text: 'Cada respuesta cita exactamente el documento y el número de página de donde se extrajo la información, garantizando trazabilidad y eliminando alucinaciones en contextos de seguridad industrial.' },
+                ],
+                featuresEn: [
+                    { label: 'Orchestration · Agent', text: 'Local RAG architecture with LangGraph and LangChain for agent state and tool management. Claude 3.5 Haiku (Anthropic API) reasoning engine with ToolStrategy for strict structured outputs.' },
+                    { label: 'Local Vectorization · Privacy', text: 'HuggingFace models (all-MiniLM-L6-v2) running on CPU to ensure industrial document privacy without sending data to external services.' },
+                    { label: 'Semantic Search · FAISS', text: 'FAISS (Facebook AI Similarity Search) in-memory vector database for ultra-low latency retrieval over indexed PDF manual chunks.' },
+                    { label: 'Traceability · No Hallucinations', text: 'Every response cites the exact document and page number from which the information was extracted, ensuring traceability and eliminating hallucinations in industrial safety contexts.' },
+                ],
+                tech: ['Python', 'LangGraph', 'LangChain', 'Claude 3.5 Haiku', 'HuggingFace', 'FAISS', 'RAG', 'Anthropic API'],
+                github: 'https://github.com/CristhianTechAIHub/Agente_PLC',
+                video: 'https://youtu.be/-lPIV5IYBSI',
             },
         ];
 
@@ -2276,7 +2339,9 @@
         function applyEditorMode() {
             document.body.classList.toggle('editor-mode', editorMode);
             const btn = document.getElementById('lockBtn');
-            if (btn) btn.innerHTML = editorMode ? '🔓 Salir' : '🔒 Editar';
+            if (!btn) return;
+            // Use hardcoded fallback — setLanguage() will localize this once TRANSLATIONS is ready
+            btn.innerHTML = editorMode ? '🔓 Exit' : '🔒 Edit';
         }
 
         function onLockClick() {
@@ -2561,25 +2626,26 @@
             const grid = document.getElementById('featuredGrid');
             const highlightIds = getHighlights();
             const featured = PROJECTS.filter(p => highlightIds.includes(p.id));
+            const t = TRANSLATIONS[currentLang];
             if (!featured.length) {
-                grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><span class="empty-state-icon">⭐</span><span class="empty-state-text">// marca proyectos con ⭐ desde la sección de abajo</span></div>`;
+                grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><span class="empty-state-icon">⭐</span><span class="empty-state-text">${t.featuredEmpty}</span></div>`;
                 return;
             }
             grid.innerHTML = featured.map(p => {
                 const imgHtml = p.images.length
-                    ? `<img class="feat-img" src="${p.images[0]}" alt="${p.name}" loading="lazy">`
-                    : `<div class="feat-img-ph"><span class="feat-img-ph-icon">${p.imagePlaceholder?.icon ?? '🛠️'}</span><span class="feat-img-ph-label">${p.imagePlaceholder?.label ?? p.name}</span></div>`;
+                    ? `<img class="feat-img" src="${p.images[0]}" alt="${pText(p,'name')}" loading="lazy">`
+                    : `<div class="feat-img-ph"><span class="feat-img-ph-icon">${p.imagePlaceholder?.icon ?? '🛠️'}</span><span class="feat-img-ph-label">${p.imagePlaceholder?.label ?? pText(p,'name')}</span></div>`;
                 const tags = p.tech.slice(0, 5).map(t => `<span class="tbadge">${t}</span>`).join('');
                 return `
           <div class="feat-card reveal" onclick="openModal('${p.id}')">
             ${imgHtml}
             <div class="feat-body">
               <p class="feat-num">${p.num}</p>
-              <h3 class="feat-name">${p.name}</h3>
-              <p class="feat-client">${p.client}</p>
-              <p class="feat-excerpt">${p.excerpt}</p>
+              <h3 class="feat-name">${pText(p,'name')}</h3>
+              <p class="feat-client">${pText(p,'client')}</p>
+              <p class="feat-excerpt">${pText(p,'excerpt')}</p>
               <div class="feat-tags">${tags}</div>
-              <span class="feat-cta">Ver proyecto completo →</span>
+              <span class="feat-cta">${TRANSLATIONS[currentLang].featuredCta}</span>
             </div>
           </div>`;
             }).join('');
@@ -2595,28 +2661,30 @@
 
         function renderTabs() {
             const container = document.getElementById('skillTabs');
+            const t = TRANSLATIONS[currentLang];
             container.innerHTML = SKILLS.map(s => `
         <span class="skill-tab-wrap">
           <button class="skill-tab${s.id === activeSkill ? ' active' : ''}" onclick="selectSkill('${s.id}')">
-            ${s.label}
+            ${sLabel(s)}
             <span class="skill-tab-actions">
-              <span class="skill-tab-action" title="Editar" onclick="openSkillForm('${s.id}');event.stopPropagation()">✏</span>
-              <span class="skill-tab-action del" title="Eliminar" onclick="deleteSkill('${s.id}');event.stopPropagation()">✕</span>
+              <span class="skill-tab-action" title="Edit" onclick="openSkillForm('${s.id}');event.stopPropagation()">✏</span>
+              <span class="skill-tab-action del" title="Delete" onclick="deleteSkill('${s.id}');event.stopPropagation()">✕</span>
             </span>
           </button>
         </span>
-      `).join('') + `<button class="add-skill-btn" onclick="openSkillForm()">＋ Nueva especialidad</button>`;
+      `).join('') + `<button class="add-skill-btn" onclick="openSkillForm()">${t.addSkillBtn}</button>`;
         }
 
         function renderPanel() {
             const container = document.getElementById('projectsPanel');
             const filtered = PROJECTS.filter(p => p.skills.includes(activeSkill));
+            const t = TRANSLATIONS[currentLang];
 
             if (!filtered.length) {
                 container.innerHTML = `
           <div class="empty-state">
             <span class="empty-state-icon">🚧</span>
-            <span class="empty-state-text">// proyectos en camino</span>
+            <span class="empty-state-text">${t.projectsEmpty}</span>
           </div>`;
                 return;
             }
@@ -2625,18 +2693,18 @@
             container.innerHTML = `<div class="projects-panel-grid">
         ${filtered.map(p => {
                 const imgHtml = p.images.length
-                    ? `<img class="mini-img" src="${p.images[0]}" alt="${p.name}" loading="lazy">`
+                    ? `<img class="mini-img" src="${p.images[0]}" alt="${pText(p,'name')}" loading="lazy">`
                     : `<div class="mini-img-ph">${p.imagePlaceholder?.icon ?? '🛠️'}</div>`;
                 const isHL = highlightIds.includes(p.id);
                 return `
             <div class="mini-card" onclick="openModal('${p.id}')" style="position:relative">
               ${imgHtml}
-              <button class="highlight-btn${isHL ? ' active' : ''}" title="${isHL ? 'Quitar de destacados' : 'Marcar como destacado'}" onclick="toggleHighlight('${p.id}', event)">⭐</button>
-              <button class="edit-btn" title="Editar proyecto" onclick="openProjectForm('${p.id}');event.stopPropagation()">✏️</button>
+              <button class="highlight-btn${isHL ? ' active' : ''}" onclick="toggleHighlight('${p.id}', event)">⭐</button>
+              <button class="edit-btn" onclick="openProjectForm('${p.id}');event.stopPropagation()">✏️</button>
               <div class="mini-body">
                 <p class="mini-num">${p.num}</p>
-                <p class="mini-name">${p.name}</p>
-                <p class="mini-client">${p.client.split('·')[0].trim()}</p>
+                <p class="mini-name">${pText(p,'name')}</p>
+                <p class="mini-client">${pText(p,'client').split('·')[0].trim()}</p>
               </div>
             </div>`;
             }).join('')}
@@ -2663,26 +2731,27 @@
                 : `<div class="modal-img-ph"><span class="modal-img-ph-icon">${p.imagePlaceholder?.icon ?? '🛠️'}</span><span class="modal-img-ph-label">${p.imagePlaceholder?.label ?? p.name}</span></div>`;
 
             // Body
-            const featuresHtml = p.features.map(f => `
+            const activeFeatures = pText(p, 'features') || p.features;
+            const featuresHtml = activeFeatures.map(f => `
         <li>${f.label ? `<span class="feat-label">${f.label}</span>` : ''}${f.text}</li>
       `).join('');
 
-            const techHtml = p.tech.map(t => `<span class="tbadge">${t}</span>`).join('');
+            const techHtml = p.tech.map(tk => `<span class="tbadge">${tk}</span>`).join('');
+            const mt = TRANSLATIONS[currentLang];
 
             let linksHtml = '';
             if (p.github) linksHtml += `<a href="${p.github}" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:.82rem;padding:.55rem 1.2rem;">GitHub ↗</a>`;
             if (p.video) linksHtml += `<a href="${p.video}"  target="_blank" rel="noopener" class="btn btn-outline" style="font-size:.82rem;padding:.55rem 1.2rem;">Ver demo ▶</a>`;
 
-            // Badges de "en preparación" para lo que aún no tiene link
             let pendingHtml = '';
-            if (!p.github) pendingHtml += `<span class="demo-pending">⏳ Código — próximamente</span>`;
-            if (!p.video) pendingHtml += `<span class="demo-pending">🎬 Demo en video — próximamente</span>`;
+            if (!p.github) pendingHtml += `<span class="demo-pending">${mt.modalPending1}</span>`;
+            if (!p.video) pendingHtml += `<span class="demo-pending">${mt.modalPending2}</span>`;
 
             document.getElementById('modalBody').innerHTML = `
         <p class="modal-num">${p.num}</p>
-        <h3 class="modal-title">${p.name}</h3>
-        <p class="modal-client">${p.client}</p>
-        <p class="modal-desc">${p.description}</p>
+        <h3 class="modal-title">${pText(p,'name')}</h3>
+        <p class="modal-client">${pText(p,'client')}</p>
+        <p class="modal-desc">${pText(p,'description')}</p>
         <ul class="modal-features">${featuresHtml}</ul>
         <div class="modal-tech">${techHtml}</div>
         <div class="modal-links">
@@ -2753,11 +2822,179 @@
             });
         });
 
+        /* ══════════════════════════════
+           INTERNATIONALIZATION (i18n)
+        ══════════════════════════════ */
+        let currentLang = localStorage.getItem('portfolio_lang') ?? 'en';
+        if (!currentLang) currentLang = 'en';
+
+        const TRANSLATIONS = {
+            en: {
+                langBtn: '🇵🇪 ES',
+                navHighlights: 'Highlights', navProjects: 'Projects', navContact: 'Contact',
+                lockBtn: '🔒 Edit', lockBtnExit: '🔓 Exit',
+                heroEyebrow: '// Mechatronic Engineer · Edge AI & Industrial Automation',
+                heroHeadline: 'Integrating artificial intelligence',
+                heroGradient: 'to the heart of industry',
+                heroSub: 'Specialist in Edge AI, Computer Vision and Critical Control Systems. I transform industrial data into autonomous actions with millimeter-level precision.',
+                heroMetricLabels: ['years in industrial AI', 'integrated technologies', 'systems in production', 'results-oriented'],
+                heroCta1: 'View projects',
+                heroTags: ['Edge AI', 'Computer Vision', 'Machine Learning', 'Control Systems', 'Industry 4.0', 'Collaborative Robotics', 'NVIDIA Jetson', 'ROS 2', 'Predictive Analytics'],
+                featuredEyebrow: '// best projects',
+                featuredTitle: 'Featured Projects',
+                featuredSub: 'The projects that best represent my work at the intersection of AI and industrial automation.',
+                featuredCta: 'View full project →',
+                featuredEmpty: '// mark projects with ⭐ from the section below',
+                projectsEyebrow: '// portfolio',
+                projectsTitle: 'My Projects',
+                projectsSub: 'Choose a technology and discover what I\'ve built with it.',
+                addSkillBtn: '＋ New specialty',
+                projectsEmpty: '// projects on the way',
+                contactEyebrow: '// let\'s talk',
+                contactTitle: 'How can I help you optimize',
+                contactGradient: 'your processes?',
+                contactText: 'Available for consulting projects, R&D collaborations and job opportunities in applied artificial intelligence, industrial automation and robotics.',
+                contactAvail: 'Available for new projects',
+                flipBadge: 'hover · view profile ↻',
+                flipLabel1: '// experience', flipLabel2: '// education',
+                flipDegree: 'Bachelor in Mechatronic Engineering',
+                modalPending1: '⏳ Code — coming soon', modalPending2: '🎬 Video demo — coming soon',
+            },
+            es: {
+                langBtn: '🇺🇸 EN',
+                navHighlights: 'Destacados', navProjects: 'Proyectos', navContact: 'Contacto',
+                lockBtn: '🔒 Editar', lockBtnExit: '🔓 Salir',
+                heroEyebrow: '// Ingeniero Mecatrónico · Edge AI & Automatización Industrial',
+                heroHeadline: 'Integrando la inteligencia artificial',
+                heroGradient: 'al corazón de la industria',
+                heroSub: 'Especialista en Edge AI, Visión por Computadora y Sistemas de Control Críticos. Transformo datos industriales en acciones autónomas con precisión milimétrica.',
+                heroMetricLabels: ['años en IA industrial', 'tecnologías integradas', 'sistemas en producción', 'orientado a resultados'],
+                heroCta1: 'Ver proyectos',
+                heroTags: ['Edge AI', 'Visión por Computadora', 'Machine Learning', 'Sistemas de Control', 'Industria 4.0', 'Robótica Colaborativa', 'NVIDIA Jetson', 'ROS 2', 'Analítica Predictiva'],
+                featuredEyebrow: '// mejores proyectos',
+                featuredTitle: 'Proyectos Destacados',
+                featuredSub: 'Los proyectos que mejor representan mi trabajo en la intersección de la IA y la automatización industrial.',
+                featuredCta: 'Ver proyecto completo →',
+                featuredEmpty: '// marca proyectos con ⭐ desde la sección de abajo',
+                projectsEyebrow: '// portafolio',
+                projectsTitle: 'Mis Proyectos',
+                projectsSub: 'Elige una tecnología y descubre qué he construido con ella.',
+                addSkillBtn: '＋ Nueva especialidad',
+                projectsEmpty: '// proyectos en camino',
+                contactEyebrow: '// hablemos',
+                contactTitle: '¿Cómo puedo ayudarte a optimizar',
+                contactGradient: 'tus procesos?',
+                contactText: 'Estoy disponible para proyectos de consultoría, colaboraciones en I+D y oportunidades laborales en inteligencia artificial aplicada, automatización industrial y robótica.',
+                contactAvail: 'Disponible para nuevos proyectos',
+                flipBadge: 'hover · ver perfil ↻',
+                flipLabel1: '// experiencia', flipLabel2: '// educación',
+                flipDegree: 'Bachiller en Ingeniería Mecatrónica',
+                modalPending1: '⏳ Código — próximamente', modalPending2: '🎬 Demo en video — próximamente',
+            },
+        };
+
+        // Helper: get localized field from a project object
+        function pText(p, field) {
+            if (currentLang === 'en') {
+                const enVal = p[field + 'En'];
+                if (enVal !== undefined) return enVal;
+            }
+            return p[field];
+        }
+
+        // Helper: get localized skill label
+        function sLabel(s) {
+            return currentLang === 'en' && s.labelEn ? s.labelEn : s.label;
+        }
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('portfolio_lang', lang);
+            const t = TRANSLATIONS[lang];
+
+            // Lang button
+            const lb = document.getElementById('langBtn');
+            if (lb) lb.textContent = t.langBtn;
+
+            // Nav links
+            const navLinks = document.querySelectorAll('.nav-links li a');
+            const navKeys = ['navHighlights', 'navProjects', 'navContact'];
+            navLinks.forEach((a, i) => { if (navKeys[i]) a.textContent = t[navKeys[i]]; });
+
+            // Lock btn text (preserve state)
+            const lockBtn = document.getElementById('lockBtn');
+            if (lockBtn) lockBtn.innerHTML = editorMode ? t.lockBtnExit : t.lockBtn;
+
+            // Hero
+            const eyebrow = document.querySelector('.hero-eyebrow');
+            if (eyebrow) eyebrow.textContent = t.heroEyebrow;
+
+            const headline = document.querySelector('.hero-headline');
+            if (headline) headline.innerHTML = `${t.heroHeadline}<br><span class="gradient">${t.heroGradient}</span>`;
+
+            const sub = document.querySelector('.hero-sub');
+            if (sub) sub.textContent = t.heroSub;
+
+            document.querySelectorAll('.hero-metric').forEach((m, i) => {
+                const lbl = m.querySelector('.hero-metric-label');
+                if (lbl && t.heroMetricLabels[i]) lbl.textContent = t.heroMetricLabels[i];
+            });
+
+            const cta1 = document.querySelector('.hero-cta a:first-child');
+            if (cta1) cta1.textContent = t.heroCta1;
+
+            document.querySelectorAll('.hero-tags .hero-tag').forEach((tag, i) => {
+                if (t.heroTags[i]) tag.textContent = t.heroTags[i];
+            });
+
+            // Flip card
+            const badge = document.querySelector('.flip-hint-badge');
+            if (badge) badge.textContent = t.flipBadge;
+            const flipLabels = document.querySelectorAll('.flip-back-label');
+            if (flipLabels[0]) flipLabels[0].textContent = t.flipLabel1;
+            if (flipLabels[1]) flipLabels[1].textContent = t.flipLabel2;
+            const degree = document.querySelector('.flip-back-degree');
+            if (degree) degree.textContent = t.flipDegree;
+
+            // Featured section static text
+            const fEyebrow = document.querySelector('#destacados .section-eyebrow');
+            if (fEyebrow) fEyebrow.textContent = t.featuredEyebrow;
+            const fTitle = document.querySelector('#destacados .section-title');
+            if (fTitle) fTitle.textContent = t.featuredTitle;
+            const fSub = document.querySelector('#destacados .section-sub');
+            if (fSub) fSub.textContent = t.featuredSub;
+
+            // Projects section static text
+            const pEyebrow = document.querySelector('#proyectos .section-eyebrow');
+            if (pEyebrow) pEyebrow.textContent = t.projectsEyebrow;
+            const pTitle = document.querySelector('#proyectos .section-title');
+            if (pTitle) pTitle.textContent = t.projectsTitle;
+            const pSub = document.querySelector('#proyectos .section-sub');
+            if (pSub) pSub.textContent = t.projectsSub;
+
+            // Contact
+            const cEyebrow = document.querySelector('#contacto .section-eyebrow');
+            if (cEyebrow) cEyebrow.textContent = t.contactEyebrow;
+            const cTitle = document.querySelector('.contact-title');
+            if (cTitle) cTitle.innerHTML = `${t.contactTitle}<br><span class="gradient">${t.contactGradient}</span>`;
+            const cText = document.querySelector('.contact-text');
+            if (cText) cText.textContent = t.contactText;
+            const cAvail = document.querySelector('.contact-availability');
+            if (cAvail) cAvail.textContent = t.contactAvail;
+
+            // Re-render dynamic sections
+            renderFeatured();
+            renderTabs();
+            renderPanel();
+        }
+
+        function toggleLanguage() {
+            setLanguage(currentLang === 'en' ? 'es' : 'en');
+        }
+
         /* ── Init ── */
         PROJECTS = loadAllProjects();
-        renderFeatured();
-        renderTabs();
-        renderPanel();
+        setLanguage(currentLang);
     </script>
 
 </body>
