@@ -2741,7 +2741,7 @@
 
             let linksHtml = '';
             if (p.github) linksHtml += `<a href="${p.github}" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:.82rem;padding:.55rem 1.2rem;">GitHub ↗</a>`;
-            if (p.video) linksHtml += `<a href="${p.video}"  target="_blank" rel="noopener" class="btn btn-outline" style="font-size:.82rem;padding:.55rem 1.2rem;">Ver demo ▶</a>`;
+            if (p.video) linksHtml += `<a href="${p.video}"  target="_blank" rel="noopener" class="btn btn-outline" style="font-size:.82rem;padding:.55rem 1.2rem;">${currentLang === 'en' ? 'Watch Demo' : 'Ver demo'} ▶</a>`;
 
             let pendingHtml = '';
             if (!p.github) pendingHtml += `<span class="demo-pending">${mt.modalPending1}</span>`;
