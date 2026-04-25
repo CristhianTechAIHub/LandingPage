@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cristhian Campos · Edge AI & Automatización Industrial</title>
+    <meta name="description"
+        content="Especialista en Edge AI, Visión por Computadora y Sistemas de Control Críticos. Portafolio de Cristhian Moises Campos Neyra.">
+
+    <!-- Open Graph / LinkedIn / WhatsApp -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Cristhian Campos · Edge AI & Automatización Industrial">
+    <meta property="og:description"
+        content="Especialista en Edge AI, Visión por Computadora y Sistemas de Control Críticos. Transformo datos industriales en acciones autónomas con precisión milimétrica.">
+    <meta property="og:url" content="https://cristhiancampos.dev">
+    <meta property="og:image" content="https://cristhiancampos.dev/images/og-banner.jpg">
+    <meta property="og:locale" content="es_PE">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cristhian Campos · Edge AI & Automatización Industrial">
+    <meta name="twitter:description"
+        content="Especialista en Edge AI, Visión por Computadora y Sistemas de Control Críticos.">
+    <meta name="twitter:image" content="https://cristhiancampos.dev/images/og-banner.jpg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <!-- ── Nav ── -->
+    <nav>
+        <a class="nav-logo" href="#hero">cristhian<span>.campos</span></a>
+        <ul class="nav-links">
+            <li><a href="#destacados">Highlights</a></li>
+            <li><a href="#proyectos">Projects</a></li>
+            <li><a href="#contacto">Contact</a></li>
+        </ul>
+        <div class="nav-editor-area">
+            <button class="lang-btn" id="langBtn" onclick="toggleLanguage()" title="Switch language">🇵🇪 ES</button>
+            <span class="editor-badge">● EDITOR</span>
+            <button class="lock-btn" id="lockBtn" onclick="onLockClick()">🔒 Edit</button>
+        </div>
+    </nav>
+
+    <!-- Password modal -->
+    <div class="pass-overlay" id="passOverlay">
+        <div class="pass-box">
+            <h3>🔐 Modo editor</h3>
+            <p>Ingresa la contraseña para acceder a las herramientas de edición.</p>
+            <input class="pass-input" id="passInput" type="password" placeholder="Contraseña..." autocomplete="off">
+            <span class="pass-error" id="passError">Contraseña incorrecta.</span>
+            <div style="display:flex;gap:.75rem">
+                <button class="btn btn-primary" style="flex:1" onclick="submitPassword()">Ingresar</button>
+                <button class="btn btn-outline" onclick="closePassModal()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project form overlay -->
+    <div class="form-overlay" id="formOverlay">
+        <form class="project-form" id="projectForm" onsubmit="return false">
+            <div class="form-header">
+                <h2 id="formTitle">Nuevo proyecto</h2>
+                <button class="form-close" type="button" onclick="closeProjectForm()">✕</button>
+            </div>
+
+            <div>
+                <p class="form-section-title">// INFORMACIÓN BÁSICA</p>
+                <div class="form-grid">
+                    <div class="form-field">
+                        <label class="form-label">Nombre del proyecto *</label>
+                        <input class="form-input" id="fName" placeholder="Sistema de visión artificial" required>
+                    </div>
+                    <div class="form-field">
+                        <label class="form-label">Subtítulo / cliente</label>
+                        <input class="form-input" id="fClient" placeholder="Detección de defectos · Manufactura">
+                    </div>
+                    <div class="form-field full">
+                        <label class="form-label">Resumen breve (excerpt) *</label>
+                        <input class="form-input" id="fExcerpt" placeholder="Una línea que describe el proyecto al visitante..." required>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <p class="form-section-title">// DESCRIPCIÓN COMPLETA</p>
+                <div class="form-field">
+                    <label class="form-label">Descripción detallada</label>
+                    <textarea class="form-textarea" id="fDescription" rows="5" placeholder="Explica el problema, tu solución y el impacto generado..."></textarea>
+                </div>
+            </div>
+
+            <div>
+                <p class="form-section-title">// CARACTERÍSTICAS TÉCNICAS</p>
+                <div class="features-list" id="featuresList"></div>
+                <button class="add-feature-btn" type="button" onclick="addFeatureRow()">＋ Añadir característica</button>
+            </div>
+
+            <div>
+                <p class="form-section-title">// TECNOLOGÍAS</p>
+                <div class="form-field">
+                    <label class="form-label">Stack tecnológico (separado por comas)</label>
+                    <input class="form-input" id="fTech" placeholder="Python, PyTorch, YOLO, ROS 2, PLC S7-1500">
+                </div>
+            </div>
+
+            <div>
+                <p class="form-section-title">// CATEGORÍAS</p>
+                <div class="skills-check-group" id="skillsCheckGroup"></div>
+                <span class="field-error" id="skillsError">Por favor, seleccione la especialidad del proyecto.</span>
+            </div>
+
+            <div>
+                <p class="form-section-title">// IMAGEN DE PORTADA</p>
+                <div class="form-field">
+                    <label class="form-label">Sube una imagen desde tu computadora</label>
+                    <input type="file" class="form-input" id="fImageFile" accept="image/*" onchange="uploadImageFile(this)">
+                    <span id="uploadStatus" style="font-size:.78rem;color:var(--accent-cyan);margin-top:.2rem;display:block;"></span>
+                    <label class="form-label" style="margin-top:.75rem">O pega una URL de imagen</label>
+                    <input class="form-input" id="fImage" placeholder="https://... o images/proyecto/foto.jpg" oninput="previewImage()">
+                    <img class="img-preview" id="imgPreview" alt="Preview">
+                </div>
+            </div>
+
+            <div>
+                <p class="form-section-title">// LINKS</p>
+                <div class="form-grid">
+                    <div class="form-field">
+                        <label class="form-label">GitHub</label>
+                        <input class="form-input" id="fGithub" placeholder="https://github.com/...">
+                    </div>
+                    <div class="form-field">
+                        <label class="form-label">Video demo</label>
+                        <input class="form-input" id="fVideo" placeholder="https://youtube.com/...">
+                    </div>
+                </div>
+            </div>
+
+            <input type="hidden" id="fEditId">
+
+            <div class="form-actions">
+                <button class="btn btn-danger" type="button" id="deleteBtn" onclick="deleteCurrentProject()" style="display:none">Eliminar proyecto</button>
+                <button class="btn btn-outline" type="button" onclick="closeProjectForm()">Cancelar</button>
+                <button class="btn btn-primary" type="button" onclick="saveProjectForm()">Guardar proyecto</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- FAB -->
+    <button class="fab-add" onclick="openProjectForm(null)">＋ Añadir proyecto</button>
+
+    <!-- Skill form modal -->
+    <div class="skill-form-overlay" id="skillFormOverlay">
+        <div class="skill-form-box">
+            <h3 id="skillFormTitle">Nueva especialidad</h3>
+            <div class="form-field">
+                <label class="form-label">Nombre de la especialidad *</label>
+                <input class="form-input" id="skillNameInput" placeholder="Ej: Control Industrial" maxlength="40">
+                <span class="field-error" id="skillNameError">Por favor, ingresa un nombre para la especialidad.</span>
+            </div>
+            <input type="hidden" id="skillEditId">
+            <div style="display:flex;gap:.75rem;justify-content:flex-end">
+                <button class="btn btn-outline" onclick="closeSkillForm()">Cancelar</button>
+                <button class="btn btn-primary" onclick="saveSkillForm()">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <main>
+
+        <!-- ══════════════════════════════
+         HERO
+    ══════════════════════════════ -->
+        <section id="hero">
+            <div class="hero-inner">
+
+                <!-- Text -->
+                <div class="hero-content">
+                    <p class="hero-eyebrow">// Mechatronic Engineer · Edge AI &amp; Industrial Automation</p>
+                    <h1 class="hero-headline">
+                        Integrating artificial intelligence<br>
+                        <span class="gradient">to the heart of industry</span>
+                    </h1>
+                    <p class="hero-sub">
+                        Specialist in Edge AI, Computer Vision and Critical Control Systems.
+                        I transform industrial data into autonomous actions with millimeter-level precision.
+                    </p>
+                    <div class="hero-metrics">
+                        <div class="hero-metric">
+                            <span class="hero-metric-num">1+</span>
+                            <span class="hero-metric-label">years in industrial AI</span>
+                        </div>
+                        <div class="hero-metric">
+                            <span class="hero-metric-num">5+</span>
+                            <span class="hero-metric-label">integrated technologies</span>
+                        </div>
+                        <div class="hero-metric">
+                            <span class="hero-metric-num">2</span>
+                            <span class="hero-metric-label">systems in production</span>
+                        </div>
+                        <div class="hero-metric">
+                            <span class="hero-metric-num">100%</span>
+                            <span class="hero-metric-label">results-oriented</span>
+                        </div>
+                    </div>
+                    <div class="hero-cta">
+                        <a href="#proyectos" class="btn btn-primary">View projects</a>
+                        <a href="https://www.linkedin.com/in/cristhian-moises-campos-neyra-a8bb27257" target="_blank"
+                            rel="noopener" class="btn btn-outline">LinkedIn ↗</a>
+                    </div>
+                    <div class="hero-tags">
+                        <span class="hero-tag">Edge AI</span>
+                        <span class="hero-tag">Computer Vision</span>
+                        <span class="hero-tag">Machine Learning</span>
+                        <span class="hero-tag">Control Systems</span>
+                        <span class="hero-tag">Industry 4.0</span>
+                        <span class="hero-tag">Collaborative Robotics</span>
+                        <span class="hero-tag">NVIDIA Jetson</span>
+                        <span class="hero-tag">ROS 2</span>
+                        <span class="hero-tag">Predictive Analytics</span>
+                    </div>
+                </div>
+
+                <!-- Flip card -->
+                <div class="hero-photo-wrap">
+                    <div class="flip-card" tabindex="0" role="button" aria-label="Ver perfil profesional">
+                        <div class="flip-card-inner">
+                            <div class="flip-front">
+                                <div class="flip-front-inner">
+                                    <img src="images/foto_perfil/FOTO CRISTHIAN.png" alt="Cristhian Campos" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;display:block;">
+                                </div>
+                                <span class="flip-hint-badge">hover · view profile ↻</span>
+                            </div>
+                            <div class="flip-back">
+                                <div class="flip-back-section">
+                                    <span class="flip-back-label">// experience</span>
+                                    <span class="flip-back-company">DINAUT</span>
+                                    <span class="flip-back-role">Full development and integration of software with hardware in industrial automation and AI systems.</span>
+                                    <span class="flip-back-period">2024 – Present</span>
+                                </div>
+                                <div class="flip-divider"></div>
+                                <div class="flip-back-section">
+                                    <span class="flip-back-label">// education</span>
+                                    <span class="flip-back-uni">Pontificia Universidad Católica del Perú</span>
+                                    <span class="flip-back-degree">Bachelor in Mechatronic Engineering</span>
+                                </div>
+                                <div class="flip-location"><span>📍</span><span>Lima, Perú</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════
+         FEATURED PROJECTS
+    ══════════════════════════════ -->
+        <section id="destacados">
+            <p class="section-eyebrow reveal">// best projects</p>
+            <h2 class="section-title reveal">Featured Projects</h2>
+            <p class="section-sub reveal">The projects that best represent my work at the intersection of AI and industrial automation.</p>
+
+            <div class="featured-grid" id="featuredGrid">
+                <!-- Rendered by JS -->
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════
+         PROJECTS BY SKILL
+    ══════════════════════════════ -->
+        <section id="proyectos">
+            <p class="section-eyebrow reveal">// portfolio</p>
+            <h2 class="section-title reveal">My Projects</h2>
+            <p class="section-sub reveal">Choose a technology and discover what I've built with it.</p>
+
+            <div class="skill-tabs" id="skillTabs">
+                <!-- Rendered by JS -->
+            </div>
+
+            <div class="projects-panel" id="projectsPanel">
+                <!-- Rendered by JS -->
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════
+         CONTACT
+    ══════════════════════════════ -->
+        <section id="contacto">
+            <div class="contact-card reveal">
+                <div class="contact-left">
+                    <p class="section-eyebrow" style="margin-bottom:1rem;">// let's talk</p>
+                    <h2 class="contact-title">How can I help you optimize<br><span class="gradient">your processes?</span></h2>
+                    <p class="contact-text">
+                        Available for consulting projects, R&amp;D collaborations and job opportunities in applied artificial intelligence, industrial automation and robotics.
+                    </p>
+                </div>
+                <div class="contact-right">
+                    <span class="contact-availability">Available for new projects</span>
+                    <div class="contact-links">
+                        <a href="https://www.linkedin.com/in/cristhian-moises-campos-neyra-a8bb27257" target="_blank"
+                            rel="noopener" class="btn btn-primary">LinkedIn ↗</a>
+                        <a href="https://wa.me/51922247024" target="_blank" rel="noopener"
+                            class="btn btn-green">WhatsApp ↗</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ── Footer ── -->
+    <footer>
+        <p>// cristhian.campos &nbsp;·&nbsp; ingeniero mecatrónico &nbsp;·&nbsp; &copy; 2026</p>
+    </footer>
+
+    <!-- ══════════════════════════════
+       MODAL
+  ══════════════════════════════ -->
+    <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true">
+        <div class="modal" id="modal">
+            <button class="modal-close" id="modalClose" aria-label="Cerrar">✕</button>
+            <div class="modal-img-area" id="modalImg"></div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>

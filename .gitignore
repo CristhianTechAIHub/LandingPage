@@ -1,0 +1,15 @@
+# Python
+backend/.env
+backend/__pycache__/
+backend/**/__pycache__/
+backend/*.pyc
+backend/.venv/
+backend/venv/
+
+# Node / Vercel
+node_modules/
+.vercel/
+
+# OS
+.DS_Store
+Thumbs.db
