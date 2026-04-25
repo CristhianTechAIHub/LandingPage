@@ -1,7 +1,7 @@
 /* ══════════════════════════════
    CONFIG — cambia por la URL de Railway al desplegar
 ══════════════════════════════ */
-const API_URL = 'http://localhost:8000';
+const API_URL = 'https://portfolio-backend-production-8442.up.railway.app';
 
 /* ══════════════════════════════
    API HELPERS
