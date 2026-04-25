@@ -7,7 +7,7 @@ app = FastAPI(title="Portfolio API", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # En producción: reemplazar con el dominio de Vercel
+    allow_origins=settings.allowed_origins,
     allow_methods=["*"],
     allow_headers=["*"],
 )
